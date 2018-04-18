@@ -23,6 +23,9 @@
     <!-- SPECIFIC CSS -->
     <link rel="stylesheet" type="text/css" href="css/DateTimePicker.css">
     <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
+
+    <!-- modal login form css -->
+    <link rel="stylesheet" type="text/css" href="css/modal.css">
     
     <!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
@@ -32,28 +35,7 @@
 </head>
 
 <body>
-    <div class="modal fade show" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" style="display: block; padding-right: 17px;">
-                    <div class="modal-dialog modal-sm" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="smallmodalLabel">Sign In</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <label>User Name</label><br>
-                                <input type="text" placeholder="Username"><br>
-                                <label>Password</label><br>
-                                <input type="password" placeholder="Password">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Confirm</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    
     <!--[if lte IE 8]>
         <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>.</p>
     <![endif]-->
@@ -118,13 +100,8 @@
                     </ul>
                     </li>
                     <li><a href="contacts.html">Contacts</a></li>
-                    <button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#smallmodal">             Small                   </button>
-                    <button class="btn_1" id="submit-booking">Sign in</button>
-                    <button class="btn_1" id="submit-booking">Register</button>
-
-
-
-
+                    <button onclick="document.getElementById('modal-wrapper').style.display='block'" class="btn_1" id="submit-booking">Sign in</button>
+                    <button onclick="document.getElementById('modal-register').style.display='block'" class="btn_1" id="submit-booking">Register</button>
                 </ul>
             </div><!-- End main-menu -->
             
@@ -524,6 +501,79 @@
     </footer><!-- End footer -->
 
 <div id="toTop"></div><!-- Back to top button -->
+
+<!-- modal register form -->
+
+<div id="modal-register" class="modal">
+  
+  <form class="modal-content animate" action="/action_page.php">
+        
+    <div class="imgcontainerr">
+      <span onclick="document.getElementById('modal-register').style.display='none'" class="close" title="Close PopUp">&times;</span>
+      <img src="img/50.png" alt="Avatar" class="avatar">
+      <h1 style="text-align:center ; color: white;" >Register</h1>
+    </div>
+
+    <div class="containerr">
+      <input type="text" placeholder="Enter Email" name="Email" id="t1">
+      <input type="text" placeholder="Enter User name" name="Uname" id="t1">
+      <input type="password" placeholder="Enter Password" name="psw" id="t1">
+      <input type="password" placeholder="Repeat your Password" name="psw" id="t1">        
+      <button type="submit" id="b1">Register</button> 
+      
+    </div>
+    
+  </form>
+  
+</div>
+
+<script>
+// If user clicks anywhere outside of the modal, Modal will close
+
+var modal = document.getElementById('modal-register');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+
+<!-- modal login form -->
+<div id="modal-wrapper" class="modal">
+  
+  <form class="modal-content animate" action="/action_page.php">
+        
+    <div class="imgcontainerr">
+      <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+      <img src="img/50.png" alt="Avatar" class="avatar">
+      <h1 style="text-align:center ; color: white;" >Sign In</h1>
+    </div>
+
+    <div class="containerr">
+      <input type="text" placeholder="Enter Email" name="Email" id="t1">
+      <input type="password" placeholder="Enter Password" name="psw" id="t1">        
+      <button type="submit" id="b1">Login</button>
+      <input type="checkbox" style="margin:26px 30px;"> <label style="color: white;">Remember me </label> 
+      <a href="#" style="color: white; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+    </div>
+    
+  </form>
+  
+</div>
+
+<script>
+// If user clicks anywhere outside of the modal, Modal will close
+
+var modal = document.getElementById('modal-wrapper');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+
         
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-1.11.2.min.js"></script>
