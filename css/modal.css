@@ -13,6 +13,7 @@
 
 /* Set a style for all buttons */
 #b1 {
+    font-family:Poppins;font-style:normal;
     background-color: rgb(240,114,88);
     color: white;
     padding: 14px 20px;
@@ -59,7 +60,7 @@
     border: none;
     width: 40%; 
 	padding-bottom: 30px;
-    font-family:Helvetica, Arial, sans-serif;
+    font-family:Poppins;font-style:normal
 }
 
 /* The Close Button (x) */
