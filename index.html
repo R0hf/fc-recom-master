@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
 <html>
 <head>
@@ -508,20 +508,25 @@
 
 <div id="modal-register" class="modal">
   
-  <form class="modal-content animate" action="/action_page.php">
+  <form class="modal-content animate"  method="POST" action="php/register.php">
         
     <div class="imgcontainerr">
       <span onclick="document.getElementById('modal-register').style.display='none'" class="close" title="Close">&times;</span>
       <img src="img/50.png" alt="Avatar" class="avatar">
       <h1 style="font-family:Poppins;font-style:normal;text-align:center ; color: white;" >Register</h1>
     </div>
+    
 
-    <div class="containerr">
-      <input type="text" placeholder="Enter Email" name="Email" id="t1">
-      <input type="text" placeholder="Enter User name" name="Uname" id="t1">
-      <input type="password" placeholder="Enter Password" name="psw" id="t1">
-      <input type="password" placeholder="Repeat your Password" name="psw" id="t1">        
-      <button type="submit" id="b1">Register</button> 
+    <div  class="containerr">
+    
+        <input type="text" placeholder="Enter name" name="name" id="t1">
+        <input type="text" placeholder="Enter lastname" name="lastname" id="t1">
+      <input type="text" placeholder="Enter Email" name="email" id="t1">
+      <input type="text" placeholder="Enter User name" name="username" id="t1">
+      <input type="password" placeholder="Enter Password" name="password" id="t1">
+      <input type="password" placeholder="Repeat your Password" name="password" id="t1">        
+      <input type="submit" id="b1" value="register"> 
+  
       
     </div>
     
@@ -544,7 +549,7 @@ window.onclick = function(event) {
 <!-- modal login form -->
 <div id="modal-wrapper" class="modal">
   
-  <form class="modal-content animate" action="/action_page.php">
+  <form class="modal-content animate" action="php/sign.php">
         
     <div class="imgcontainerr">
       <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close ">&times;</span>
@@ -553,9 +558,9 @@ window.onclick = function(event) {
     </div>
 
     <div class="containerr">
-      <input type="text" placeholder="Enter Email" name="Email" id="t1">
-      <input type="password" placeholder="Enter Password" name="psw" id="t1">        
-      <button type="submit" id="b1">Login</button>
+      <input type="text" placeholder="Enter Email" name="email" id="t1">
+      <input type="password" placeholder="Enter Password" name="password" id="t1">        
+      <input type="submit"  value="login" id="b1">
       <input type="checkbox" style="margin:26px 30px;"> <label style="color: white;">Remember me </label> 
       <a href="#" style="color: white; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
     </div>
