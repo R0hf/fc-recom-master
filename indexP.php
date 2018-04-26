@@ -61,7 +61,7 @@
     <div class="container">
         <div class="row">
             <div class="col--md-3 col-sm-3 col-xs-3">
-                <a href="index.html" id="logo">
+                <a href="indexP.php" id="logo">
                 <img src="img/logoN.png" width="190" height="23" alt="" data-retina="true">
                 </a>
             </div>
@@ -107,7 +107,7 @@
                     <li class="submenu" id="profil">
                     <a href="javascript:void(0);" class="show-submenu"><?php echo $user; ?> <img src="img/50.png" width="30px" height="30px"><i class="icon-down-open-mini"></i></a>
                     <ul>
-                        <li><a href="#">My Profile</a> </li>
+                        <li><a href="my/lite/index.html">My Profile</a> </li>
                         <li><a href="#">Log Out</a></li>
                     </ul>  
                     </li>  
