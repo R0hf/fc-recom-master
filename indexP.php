@@ -4,6 +4,8 @@
         $result = mysqli_query($connect, "select * from client ");
         if ($row = mysqli_fetch_assoc($result)) {
             $user = $row['username'];
+            $img=base64_decode($row['img']);
+            $img=substr($img,3);
         }
 
           ?>
@@ -105,7 +107,7 @@
                     </li>
                     <li><a href="contacts.html">Contacts</a></li>
                     <li class="submenu" id="profil">
-                    <a href="javascript:void(0);" class="show-submenu"><?php echo $user; ?> <img src="img/50.png" width="30px" height="30px"><i class="icon-down-open-mini"></i></a>
+                    <a href="javascript:void(0);" class="show-submenu"><?php echo $user; ?> <img src="<?php echo $img;?>" width="30px" height="30px"></a>
                     <ul>
                         <li><a href="my/lite/index.html">My Profile</a> </li>
                         <li><a href="#">Log Out</a></li>
