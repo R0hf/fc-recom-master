@@ -74,11 +74,16 @@
                                 <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a>
                             </form>
                         </li>
+                        <?php
+                    include_once("../../connect/connection.php");
+                    $r= mysqli_query($connect, "select * from client ");
+                    $l=mysqli_fetch_assoc($r);
+                    ?>
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
                         <li class="nav-item">
-                            <a class="nav-link waves-effect waves-dark" href="#"><img src="../assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link waves-effect waves-dark" href="#"><img src="<?php echo$l['img'] ?>" alt="user" class="profile-pic" /></a>
                         </li>
                     </ul>
                 </div>
@@ -132,11 +137,7 @@
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- Row -->
-                <?php
-                    include_once("../../connect/connection.php");
-                    $r= mysqli_query($connect, "select * from client ");
-                    $l=mysqli_fetch_assoc($r);
-                    ?>
+                
                 <div class="row">
                     <!-- Column -->
                     <div class="col-lg-4 col-xlg-3 col-md-5">
@@ -207,7 +208,7 @@
                                         <label class="col-sm-12">Profil picture :</label>
                                         <div >
                                          <label class="col-sm-12">
-                                         <span class="btn btn-default" style="background:black;">
+                                         <span class="btn btn-danger" >
                                               Browse&hellip; <input  name="fileto" type="file" style="display: none;" multiple>
                                          </span>
                                          </label>

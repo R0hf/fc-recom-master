@@ -104,7 +104,7 @@
                     <a href="javascript:void(0);" class="show-submenu"><?php echo $l['username']; ?> <img src="<?php echo $l['img']?>" ></a>
                     <ul>
                         <li><a href="my/lite/index.html">My Profile</a> </li>
-                        <li><a href="#">Log Out</a></li>
+                        <li><a href="php/logout.php">Log Out</a></li>
                     </ul>  
                     </li>  
                 </ul>
