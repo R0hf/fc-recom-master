@@ -549,7 +549,7 @@ window.onclick = function(event) {
 <!-- modal login form -->
 <div id="modal-wrapper" class="modal">
   
-  <form class="modal-content animate" action="php/sign.php">
+  <form class="modal-content animate"  method="POST" action="php/sign.php">
         
     <div class="imgcontainerr">
       <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close ">&times;</span>
@@ -561,8 +561,8 @@ window.onclick = function(event) {
       <input type="text" placeholder="Enter Email" name="email" id="t1">
       <input type="password" placeholder="Enter Password" name="password" id="t1">        
       <input type="submit"  value="login" id="b1">
-      <input type="checkbox" style="margin:26px 30px;"> <label style="color: white;">Remember me </label> 
-      <a href="#" style="color: white; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+      <input type="checkbox" name="remember" style="margin:26px 30px;"> <label style="color: white;">Remember me </label> 
+      <a href="forgot.php" style="color: white; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
     </div>
     
   </form>

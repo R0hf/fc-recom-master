@@ -7,18 +7,16 @@ header("Location:../index.html");
 $email = $_POST["email"];
 $password = $_POST["password"];
 if(!empty($email) && !empty($password)){
-  $epass = hash("sha512",$password).md5("dzbooking");
+  //$epass = hash("sha512",$password).md5("dzbooking");
   include_once("../connect/connection.php");
-  $query = mysqli_query($connect,"SELECT * FROM client WHERE  email = '$email' AND password='$epass'");
+  $query = mysqli_query($connect,"SELECT * FROM client WHERE  email = '$email' AND password='$password'");
   $row = mysqli_num_rows($query);
   if($row > 0){
-
-if(isset($_POST["remember"])){
-  $_SESSION["email"] = base64_encode($email);
-  $_SESSION["password"] = base64_encode($epass);
-
-}
-header("Location:../index.html");
+    if(isset($_POST["remember"])){
+    $_SESSION["email"] = base64_encode($email);
+    $_SESSION["password"] = base64_encode($password);
+  }
+  header("Location:../indexP.php");
   }else {
     echo "Error wrong email or password";
   }

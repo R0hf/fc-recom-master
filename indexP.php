@@ -1,14 +1,8 @@
-        <?php
-
-        include_once("connect/connection.php");
-        $result = mysqli_query($connect, "select * from client ");
-        if ($row = mysqli_fetch_assoc($result)) {
-            $user = $row['username'];
-            $img=base64_decode($row['img']);
-            $img=substr($img,3);
-        }
-
-          ?>
+       <?php
+                    include_once("/connect/connection.php");
+                    $r= mysqli_query($connect, "select * from client ");
+                    $l=mysqli_fetch_assoc($r);
+                    ?>
         <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
 <html>
@@ -107,7 +101,7 @@
                     </li>
                     <li><a href="contacts.html">Contacts</a></li>
                     <li class="submenu" id="profil">
-                    <a href="javascript:void(0);" class="show-submenu"><?php echo $user; ?> <img src="<?php echo $img;?>" width="30px" height="30px"></a>
+                    <a href="javascript:void(0);" class="show-submenu"><?php echo $l['username']; ?> <img src="<?php echo $l['img']?>" ></a>
                     <ul>
                         <li><a href="my/lite/index.html">My Profile</a> </li>
                         <li><a href="#">Log Out</a></li>

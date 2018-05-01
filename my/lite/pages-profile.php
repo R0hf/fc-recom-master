@@ -132,12 +132,17 @@
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- Row -->
+                <?php
+                    include_once("../../connect/connection.php");
+                    $r= mysqli_query($connect, "select * from client ");
+                    $l=mysqli_fetch_assoc($r);
+                    ?>
                 <div class="row">
                     <!-- Column -->
                     <div class="col-lg-4 col-xlg-3 col-md-5">
                         <div class="card">
                             <div class="card-body">
-                                <center class="m-t-30"> <img src="../assets/images/users/5.jpg" class="img-circle" width="150" />
+                                <center class="m-t-30"> <img src="<?php echo$l['img'] ?>" class="img-circle" width="150" />
                                     <h4 class="card-title m-t-10">Hanna Gover</h4>
                                     <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
                                     <div class="row text-center justify-content-md-center">
@@ -148,11 +153,7 @@
                             </div>
                         </div>
                     </div>
-                    <?php
-                    include_once("../../connect/connection.php");
-                    $r= mysqli_query($connect, "select * from client ");
-                    $l=mysqli_fetch_assoc($r);
-                    ?>
+                    
                     <!-- Column -->
                     <!-- Column -->
                     <div class="col-lg-8 col-xlg-9 col-md-7">
@@ -162,31 +163,31 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Name</label>
                                         <div class="col-md-12">
-                                            <input type="text" name="name" Placeholder="<?php echo $l['name']?>" class="form-control form-control-line">
+                                            <input type="text" name="name" value="<?php echo $l['name']?>"  class="form-control form-control-line">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Lastname</label>
                                         <div class="col-md-12">
-                                            <input type="text"name="lastname" Placeholder="<?php echo $l['lastname']?>" class="form-control form-control-line">
+                                            <input type="text"name="lastname" value="<?php echo $l['lastname']?>" class="form-control form-control-line">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Username</label>
                                         <div class="col-md-12">
-                                            <input type="text" name="username" Placeholder="<?php echo $l['username']?>" class="form-control form-control-line">
+                                            <input type="text" name="username" value="<?php echo $l['username']?>" class="form-control form-control-line">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="example-email" class="col-md-12">Email</label>
                                         <div class="col-md-12">
-                                            <input type="email" name="email" Placeholder="<?php echo $l['email']?>" class="form-control form-control-line" name="example-email" id="example-email">
+                                            <input type="email" name="email" value="<?php echo $l['email']?>" class="form-control form-control-line" name="example-email" id="example-email">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Password</label>
                                         <div class="col-md-12">
-                                            <input type="password" name="password" Placeholder="<?php echo $l['password']?>" class="form-control form-control-line">
+                                            <input type="password" name="password" value="<?php echo $l['password']?>" class="form-control form-control-line">
                                         </div>
                                     </div>
                                     <div class="form-group">
