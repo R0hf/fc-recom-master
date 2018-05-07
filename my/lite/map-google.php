@@ -1,4 +1,4 @@
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,11 +10,13 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>My profil</title>
+    <title>Admin Pro Admin Template - The Ultimate Bootstrap 4 Admin Template</title>
     <!-- Bootstrap Core CSS -->
     <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
+    <!-- page css -->
+    <link href="css/pages/google-vector-map.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="css/colors/default-dark.css" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -48,12 +50,15 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="indexP.html">
+                    <a class="navbar-brand" href="indexP.php">
                         <span>
                         <img src="../../img/logoN.png" width="175" height="35" alt="" data-retina="true">
                         </span>
                     </a>
                 </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
                 <div class="navbar-collapse">
                     <!-- ============================================================== -->
                     <!-- toggle and nav items -->
@@ -74,16 +79,16 @@
                                 <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a>
                             </form>
                         </li>
+                        <!-- ============================================================== -->
+                        <!-- Profile -->
+                        <!-- ============================================================== -->
                         <?php
                     include_once("../../connect/connection.php");
                     $r= mysqli_query($connect, "select * from client ");
                     $l=mysqli_fetch_assoc($r);
                     ?>
-                        <!-- ============================================================== -->
-                        <!-- Profile -->
-                        <!-- ============================================================== -->
                         <li class="nav-item">
-                            <a class="nav-link waves-effect waves-dark" href="#"><img src="<?php echo$l['img'] ?>" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link waves-effect waves-dark" href="#"><img src="<?php echo$l['img'];?>" alt="user" class="profile-pic" /></a>
                         </li>
                     </ul>
                 </div>
@@ -95,7 +100,7 @@
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        <aside class="left-sidebar">
+       <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
@@ -127,8 +132,9 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor">Profile</h3>
+                        <h3 class="text-themecolor">Google map</h3>
                     </div>
+                   
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Bread crumb and right sidebar toggle -->
@@ -136,97 +142,17 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <!-- Row -->
-                
                 <div class="row">
-                    <!-- Column -->
-                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <center class="m-t-30"> <img src="<?php echo$l['img'] ?>" class="img-circle" width="150" />
-                                    <h4 class="card-title m-t-10">Hanna Gover</h4>
-                                    <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
-                                    <div class="row text-center justify-content-md-center">
-                                        <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium"></font></a></div>
-                                        <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium"></font></a></div>
-                                    </div>
-                                </center>
+                                <h4 class="card-title">Simple Basic Map</h4>
+                                <div id="gmaps-simple" class="gmaps"></div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Column -->
-                    <!-- Column -->
-                    <div class="col-lg-8 col-xlg-9 col-md-7">
-                        <div class="card">
-                            <div class="card-body">
-                                <form class="form-horizontal form-material" method="POST" enctype="multipart/form-data" action="update-admin.php?id=<?php echo$l['id']?>">
-                                    <div class="form-group">
-                                        <label class="col-md-12">Name</label>
-                                        <div class="col-md-12">
-                                            <input type="text" name="name" value="<?php echo $l['name']?>"  class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Lastname</label>
-                                        <div class="col-md-12">
-                                            <input type="text"name="lastname" value="<?php echo $l['lastname']?>" class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Username</label>
-                                        <div class="col-md-12">
-                                            <input type="text" name="username" value="<?php echo $l['username']?>" class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="example-email" class="col-md-12">Email</label>
-                                        <div class="col-md-12">
-                                            <input type="email" name="email" value="<?php echo $l['email']?>" class="form-control form-control-line" name="example-email" id="example-email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Password</label>
-                                        <div class="col-md-12">
-                                            <input type="password" name="password" value="<?php echo $l['password']?>" class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-12">Select Country</label>
-                                        <div class="col-sm-12">
-                                            <select class="form-control form-control-line">
-                                                <option>Algeria</option>
-                                                <option>Tunisia</option>
-                                                <option>Maroco</option>
-                                                <option>France</option>
-                                                <option>Usa</option>
-                                                <option>Canada</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-12">Profil picture :</label>
-                                        <div >
-                                         <label class="col-sm-12">
-                                         <span class="btn btn-danger" >
-                                              Browse&hellip; <input  name="fileto" type="file" style="display: none;" multiple>
-                                         </span>
-                                         </label>
-                                    </div>
-                                    </div>  
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <button class="btn btn-success">Update Profile</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
                 </div>
-                <!-- Row -->
-                <!-- ========s====================================================== -->
+                <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
             </div>
@@ -237,7 +163,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer">
-                ©2018  
+                © 2017 Admin Pro by wrappixel.com
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -265,6 +191,10 @@
     <script src="js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
+    <!-- google maps api -->
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyCUBL-6KdclGJ2a_UpmB2LXvq7VOcPT7K4&sensor=true"></script>
+    <script src="../assets/plugins/gmaps/gmaps.min.js"></script>
+    <script src="../assets/plugins/gmaps/jquery.gmaps.js"></script>
 </body>
 
 </html>
