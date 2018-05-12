@@ -199,7 +199,8 @@
     </div><!-- End container -->
      <?php
                     include_once("/connect/connection.php");
-                    $r= mysqli_query($connect, "select * from hotel ");
+                    mysqli_query($connect,"UPDATE  viewcounter set views=views+1 where id='1' ");
+                    $r= mysqli_query($connect, "select * from room ");
                     $l=mysqli_fetch_assoc($r);
                     ?>
     <div class="container_styled_1">
@@ -212,7 +213,7 @@
                     <div class="room_desc_home">
                         <h3><?php echo$l['name']; ?> </h3>
                         <p>
-                            <?php echo$l['description']; ?>
+                            
                         </p>
                         <ul>
                             <li>
