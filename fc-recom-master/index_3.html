@@ -1,4 +1,4 @@
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
 <html>
 <head>
@@ -8,7 +8,7 @@
     <meta name="keywords" content="hotel, bed and breakfast, accommodations, travel, motel">
     <meta name="description" content="FC Recom - Hotel and Bed&amp;Breakfast">
     <meta name="author" content="Ansonika">
-    <title>DZ BOOKINg - Compare the prices of hotels around the world</title>
+    <title>FC Recom - Hotel and Bed&amp;Breakfast</title>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -21,11 +21,8 @@
     <link href="css/base.css" rel="stylesheet">
     
     <!-- SPECIFIC CSS -->
-    <link rel="stylesheet" type="text/css" href="css/DateTimePicker.css">
-    <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
-
-    <!-- modal login form css -->
-    <link rel="stylesheet" type="text/css" href="css/modal.css">
+     <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.theme.default.css">
     
     <!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
@@ -35,7 +32,7 @@
 </head>
 
 <body>
-    
+
     <!--[if lte IE 8]>
         <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>.</p>
     <![endif]-->
@@ -53,17 +50,16 @@
         <div class="row">
             <div class="col--md-3 col-sm-3 col-xs-3">
                 <a href="index.html" id="logo">
-                <img src="img/logoN.png" width="190" height="23" alt="" data-retina="true">
+                <img src="img/logo.png" width="190" height="23" alt="" data-retina="true">
                 </a>
             </div>
             <nav class="col--md-9 col-sm-9 col-xs-9">
             <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
             <ul id="lang_top">
-                    <li><a href="#" class="active">EN</a></li>
-                    <li><a href="#" class="active">FR</a></li>
-                    <li><a href="#" class="active">AR</a></li>
+                <li><a href="#" class="active">EN</a></li>
+                <li><a href="#">FR</a></li>
+                <li><a href="#">ES</a></li>
             </ul>
-
             <div class="main-menu">
                 <div id="header_menu">
                      <img src="img/logo_m.png" width="141" height="40" alt="" data-retina="true">
@@ -100,8 +96,6 @@
                     </ul>
                     </li>
                     <li><a href="contacts.html">Contacts</a></li>
-                    <button onclick="document.getElementById('modal-wrapper').style.display='block'" class="btn_1" >Sign in</button>
-                    <button onclick="document.getElementById('modal-register').style.display='block'" class="btn_1" >Register</button>
                 </ul>
             </div><!-- End main-menu -->
             
@@ -112,64 +106,20 @@
     <!-- End Header =============================================== -->
     
 	<!-- SubHeader =============================================== -->
-    <div class="parallax-window" id="booking" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="550">
-        <div id="subheader_home">
-            <div id="sub_content">
-                <div id="book_container">
-                    <form method="post" action="assets/check_avail_home.php" id="check_avail_home" autocomplete="off">
-                        <div id="group_3">
-                            <div id="container_5">
-                                <label>Search</label>
-                                <input type="text" class="form-control" name="name_booking" id="name_booking" placeholder="Ex : Algiers">
-                            </div>
-                            
-                        </div><!-- End group_3 -->
-                        <div id="group_1">
-                            <div id="container_1">
-                                <label>Arrival date</label>
-                                <input class="startDate1 form-control datepick" type="text" data-field="date" data-startend="start" data-startendelem=".endDate1" readonly placeholder="Arrival" id="check_in" name="check_in">
-                                <span class="input-icon"><i class="icon-calendar-7"></i></span>
-                            </div>
-                            <div id="container_2">
-                                <label>Departure date</label>
-                                 <input class="endDate1 form-control datepick" type="text" data-field="date" data-startend="end" data-startendelem=".startDate1" readonly placeholder="Departure" id="check_out" name="check_out">
-                                <span class="input-icon"><i class="icon-calendar-7"></i></span>
-                            </div>
-                        </div><!-- End group_1 -->
-                        <div id="group_2">
-                            <div id="container_3">
-                                <label>Adults</label>
-                                <div class="qty-buttons">
-                                    <input type="button" value="-" class="qtyminus" name="adults">
-                                    <input type="text" name="adults" id="adults" value="" class="qty form-control" placeholder="0">
-                                    <input type="button" value="+" class="qtyplus" name="adults">
-                                </div>
-                            </div>
-                            <div id="container_4">
-                                <label>Children</label>
-                                <div class="qty-buttons">
-                                    <input type="button" value="-" class="qtyminus" name="children">
-                                    <input type="text" name="children" id="children" value="" class="qty form-control" placeholder="0">
-                                    <input type="button" value="+" class="qtyplus" name="children">
-                                </div>
-                            </div>
-                        </div><!-- End group_2 -->
-                        
-                        <div id="container_7">
-                            <input  type="submit"  value="Search" class="btn_1" id="submit-booking">
-                        </div>
-                    </form>
-                    <div id="message-booking"></div>
-                </div><!-- End book_container -->
-            </div><!-- End sub_content -->
-        </div><!-- End subheader -->
-    </div><!-- End parallax-window -->
+    <section class="parallax-window" id="home" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="550">
+    <div id="subheader_home">
+        <div id="sub_content">
+            <h3 class="caption_header"><strong id="js-rotating">Best,Large,Cousy</strong> accommodations</h3>
+                <p><a href="#0" class="btn_slider">Read more</a></p>
+             </div><!-- End sub_content -->
+    </div><!-- End subheader -->
+    </section><!-- End section -->
     <!-- End SubHeader ============================================ -->
-            
+    
     <div class="container margin_60_35">
-        <h1 class="main_title"><em></em>Welcome to DZ BOOKINg <span>World of Hotels</span></h1>
+        <h2 class="main_title"><em></em>Welcome to Albert <span>Hotel and Bed&amp;Breakfast</span></h2>
         <p class="lead styled">
-                Compare prices from more than 200 booking sites to find the lowest rate for the hotel that's right for you.
+            Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri. In eum omnes molestie. Sed ad debet scaevola, ne mel lorem legendos. Unum etiam cum te, an elit assueverit vix, falli aliquam complectitur ex ius.
         </p>
         <div class="row">
             <div class="col-sm-6">
@@ -193,9 +143,7 @@
                         <img src="img/mosaic_4.jpg" alt="" class="img-responsive add_bottom_30"><span class="caption_2">Wellness</span>
                     </div>
                 </div>
-
             </div>
-
         </div><!-- End row -->
     </div><!-- End container -->
     
@@ -356,14 +304,16 @@
         </div><!-- End container -->
     </div><!-- End container_styled_1 -->
     
-    <section class="promo_full"><div class="promo_full_wp">
+    <section class="promo_full">
+    <div class="promo_full_wp">
         <div>
             <h3>What Clients say<span>Id tale utinam ius, an mei omnium recusabo iracundia.</span></h3>
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <div class="carousel_testimonials owl-carousel owl-theme owl-loaded owl-responsive-600">              
-                                 <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-1380px, 0px, 0px); transition: 0s; width: 4890px; padding-left: 30px; padding-right: 30px;"><div class="owl-item cloned" style="width: 660px; margin-right: 30px;"><div>
+                        <div class="carousel_testimonials">
+                        
+                            <div>
                                 <div class="box_overlay">
                                     <div class="pic">
                                         <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
@@ -373,7 +323,9 @@
                                         "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
                                     </div>
                                 </div><!-- End box_overlay -->
-                            </div></div><div class="owl-item cloned" style="width: 660px; margin-right: 30px;"><div>
+                            </div>
+                            
+                            <div>
                                 <div class="box_overlay">
                                     <div class="pic">
                                         <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
@@ -383,7 +335,9 @@
                                         "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
                                     </div>
                                 </div><!-- End box_overlay -->
-                            </div></div><div class="owl-item active" style="width: 660px; margin-right: 30px;"><div>
+                            </div>
+                            
+                            <div>
                                 <div class="box_overlay">
                                     <div class="pic">
                                         <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
@@ -393,64 +347,24 @@
                                         "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
                                     </div>
                                 </div><!-- End box_overlay -->
-                            </div></div><div class="owl-item" style="width: 660px; margin-right: 30px;"><div>
-                                <div class="box_overlay">
-                                    <div class="pic">
-                                        <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
-                                        <h4>Roberta<small>12 October 2015</small></h4>
-                                    </div>
-                                    <div class="comment">
-                                        "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
-                                    </div>
-                                </div><!-- End box_overlay -->
-                            </div></div><div class="owl-item" style="width: 660px; margin-right: 30px;"><div>
-                                <div class="box_overlay">
-                                    <div class="pic">
-                                        <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
-                                        <h4>Roberta<small>12 October 2015</small></h4>
-                                    </div>
-                                    <div class="comment">
-                                        "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
-                                    </div>
-                                </div><!-- End box_overlay -->
-                            </div></div><div class="owl-item cloned" style="width: 660px; margin-right: 30px;"><div>
-                                <div class="box_overlay">
-                                    <div class="pic">
-                                        <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
-                                        <h4>Roberta<small>12 October 2015</small></h4>
-                                    </div>
-                                    <div class="comment">
-                                        "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
-                                    </div>
-                                </div><!-- End box_overlay -->
-                            </div></div><div class="owl-item cloned" style="width: 660px; margin-right: 30px;"><div>
-                                <div class="box_overlay">
-                                    <div class="pic">
-                                        <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
-                                        <h4>Roberta<small>12 October 2015</small></h4>
-                                    </div>
-                                    <div class="comment">
-                                        "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
-                                    </div>
-                                </div><!-- End box_overlay -->
-                            </div></div></div></div><div class="owl-controls"><div class="owl-nav"><div class="owl-prev" style="display: none;">prev</div><div class="owl-next" style="display: none;">next</div></div><div class="owl-dots" style=""><div class="owl-dot active"><span></span></div><div class="owl-dot"><span></span></div><div class="owl-dot"><span></span></div></div></div></div><!-- End carousel_testimonials -->
+                            </div>
+                            
+                        </div><!-- End carousel_testimonials -->
                     </div><!-- End col-md-8 -->
                 </div><!-- End row -->
             </div><!-- End container -->
         </div><!-- End promo_full_wp -->
-    </div>
-    </section><!-- End section -->    
-    
-    <div id="dtBox"></div><!-- End datepicker -->
+    </div><!-- End promo_full -->
+    </section><!-- End section -->
     
      <footer >
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-sm-12">
-                    <img src="img/logooo.png" width="141" height="40" alt="" id="logo_footer" data-retina="true">
+                    <img src="img/logo_footer.png" width="141" height="40" alt="" id="logo_footer" data-retina="true">
 					<ul id="contact_details_footer">
-          				<li>Road 1008, Bordj bou arreridj<br>Algeria 34000</li>
-                        <li><a href="tel://00213773347971">+213 773 34 79 71</a> / <a href="#0"><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a></li>
+          				<li>Route de Sablet 1023, Marseille<br>France 01923</li>
+                        <li><a href="tel://004542344599">+45 423 445 99</a> / <a href="#0"><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a></li>
                     </ul>  
                 </div>
                 <div class="col-md-2 col-sm-4">
@@ -495,7 +409,7 @@
                             <li><a href="#"><i class="icon-vimeo"></i></a></li>
                             <li><a href="#"><i class="icon-youtube-play"></i></a></li>
                         </ul>
-                          <p>Copyright © 2018 <a target="_blank" title="DZBOOKING" href="http://DZBOOKING.com/">DZ BOOKINg</a>  |  All Right Reserved</p>
+                            <p>Copyright © 2016 <a target="_blank" title="Free CSS Themes" href="http://freecssthemes.com/">FreeCSSThemes</a>  |  All Right Reserved</p>
 
                     </div>
                 </div>
@@ -504,94 +418,6 @@
     </footer><!-- End footer -->
 
 <div id="toTop"></div><!-- Back to top button -->
-
-<!-- modal register form -->
-
-<div id="modal-register" class="modal">
-  
-  <form class="modal-content animate"  method="POST" action="php/register.php">
-        
-    <div class="imgcontainerr">
-      <span onclick="document.getElementById('modal-register').style.display='none'" class="close" title="Close">&times;</span>
-      <img src="img/50.png" alt="Avatar" class="avatar">
-      <h1 style="font-family:Poppins;font-style:normal;text-align:center ; color: white;" >Register</h1>
-    </div>
-    
-
-    <div  class="containerr">
-    
-        <input type="text" placeholder="Enter name" name="name" id="t1">
-        <input type="text" placeholder="Enter lastname" name="lastname" id="t1">
-      <input type="text" placeholder="Enter Email" name="email" id="t1">
-      <input type="text" placeholder="Enter User name" name="username" id="t1">
-      <input type="password" placeholder="Enter Password" name="password" id="t1">
-      <input type="password" placeholder="Repeat your Password" name="password" id="t1">        
-      <input type="submit" id="b1" value="register"> 
-  
-      
-    </div>
-    
-  </form>
-  
-</div>
-
-<script>
-// If user clicks anywhere outside of the modal, Modal will close
-
-var modale = document.getElementById('modal-register');
-window.onclick = function(event) {
-    if (event.target == modale) {
-        modale.style.display = "none";
-    }
-}
-</script>
-
-
-<!-- modal login form -->
-<div id="modal-wrapper" class="modal">
-  
-  <form class="modal-content animate"  method="POST" action="php/sign.php">
-        
-    <div class="imgcontainerr">
-      <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close ">&times;</span>
-      <img src="img/50.png" alt="Avatar" class="avatar">
-      <h1 style="text-align:center ; color: white;" >Sign In</h1>
-    </div>
-
-    <div class="containerr">
-      <input type="text" placeholder="Enter Email" name="email" id="t1">
-      <input type="password" placeholder="Enter Password" name="password" id="t1">        
-      <input type="submit"  value="login" id="b1">
-      <input type="checkbox" name="remember" style="margin:26px 30px;"> <label style="color: white;">Remember me </label> 
-      <a href="forgot.php" style="color: white; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
-    </div>
-    
-  </form>
-  
-</div>
-
-<script>
-// If user clicks anywhere outside of the modal, Modal will close
-
-var modal = document.getElementById('modal-register');
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-<script>
-// If user clicks anywhere outside of the modal, Modal will close
-
-var modal = document.getElementById('modal-wrapper');
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-
-
         
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-1.11.2.min.js"></script>
@@ -599,7 +425,17 @@ window.onclick = function(event) {
 <script src="assets/validate.js"></script>
 <script src="js/functions.js"></script>
 
-<script type="text/javascript" src="js/DateTimePicker.js"></script>
-<script type="text/javascript">$("#dtBox").DateTimePicker();</script>
+<!-- SPECIFIC SCRIPTS -->
+<script src="js/morphext.min.js"></script>
+<script>
+$("#js-rotating").Morphext({
+    animation: "fadeIn", // Overrides default "bounceIn"
+    separator: ",", // Overrides default ","
+    speed: 2500, // Overrides default 2000
+    complete: function () {
+        // Overrides default empty function
+    }
+});
+</script>
 </body>
 </html>

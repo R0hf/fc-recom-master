@@ -121,7 +121,7 @@
         <div id="subheader_home">
             <div id="sub_content">
                 <div id="book_container">
-                    <form method="post" action="assets/check_avail_home.php" id="check_avail_home" autocomplete="off">
+                    <form method="GET" action="home.php" id="check_avail_home" >
                         <div id="group_3">
                             <div id="container_5">
                                 <label>Search</label>
@@ -160,7 +160,9 @@
                         </div><!-- End group_2 -->
                         
                         <div id="container_7">
-                            <input type="submit" value="Search" class="btn_1" id="submit-booking">
+                            
+                            <button  type="submit" name="srch" class="btn_1" id="submit-booking"> Search </button>
+                            
                         </div>
                     </form>
                     <div id="message-booking"></div>

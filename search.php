@@ -1,3 +1,10 @@
+       <?php
+                    include_once("/connect/connection.php");
+                    $r= mysqli_query($connect, "select * from client ");
+                    $l=mysqli_fetch_assoc($r);
+        ?>
+        
+        
         <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
 <html>
@@ -52,18 +59,13 @@
     <div class="container">
         <div class="row">
             <div class="col--md-3 col-sm-3 col-xs-3">
-                <a href="index.html" id="logo">
+                <a href="indexP.php" id="logo">
                 <img src="img/logoN.png" width="190" height="23" alt="" data-retina="true">
                 </a>
             </div>
             <nav class="col--md-9 col-sm-9 col-xs-9">
             <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
-            <ul id="lang_top">
-                    <li><a href="#" class="active">EN</a></li>
-                    <li><a href="#" class="active">FR</a></li>
-                    <li><a href="#" class="active">AR</a></li>
-            </ul>
-
+            
             <div class="main-menu">
                 <div id="header_menu">
                      <img src="img/logo_m.png" width="141" height="40" alt="" data-retina="true">
@@ -100,8 +102,13 @@
                     </ul>
                     </li>
                     <li><a href="contacts.html">Contacts</a></li>
-                    <button onclick="document.getElementById('modal-wrapper').style.display='block'" class="btn_1" >Sign in</button>
-                    <button onclick="document.getElementById('modal-register').style.display='block'" class="btn_1" >Register</button>
+                    <li class="submenu" id="profil">
+                    <a href="javascript:void(0);" class="show-submenu"><?php echo $l['username']; ?> <img src="<?php echo $l['img']; ?>"></a>
+                    <ul>
+                        <li><a href="my/lite/index.php">My Profile</a> </li>
+                        <li><a href="php/logout.php">Log Out</a></li>
+                    </ul>  
+                    </li>  
                 </ul>
             </div><!-- End main-menu -->
             
@@ -116,11 +123,11 @@
         <div id="subheader_home">
             <div id="sub_content">
                 <div id="book_container">
-                    <form method="post" action="assets/check_avail_home.php" id="check_avail_home" autocomplete="off">
+                    <form method="GET" action="search.php" id="check_avail_home" autocomplete="off">
                         <div id="group_3">
                             <div id="container_5">
                                 <label>Search</label>
-                                <input type="text" class="form-control" name="name_booking" id="name_booking" placeholder="Ex : Algiers">
+                                <input type="text" class="form-control" name="name_booking" id="name_booking" value="<?php echo "mother" ?>">
                             </div>
                             
                         </div><!-- End group_3 -->
@@ -156,7 +163,7 @@
                         </div><!-- End group_2 -->
                         
                         <div id="container_7">
-                            <input  type="submit"  value="Search" class="btn_1" id="submit-booking">
+                            <input type="submit" value="        Search      " class="btn_1" id="submit-booking">
                         </div>
                     </form>
                     <div id="message-booking"></div>
@@ -167,7 +174,7 @@
     <!-- End SubHeader ============================================ -->
             
     <div class="container margin_60_35">
-        <h1 class="main_title"><em></em>Welcome to DZ BOOKINg <span>World of Hotels</span></h1>
+        <h1 class="main_title"><em></em><?php echo "string"; ?> <span>World of Hotels</span></h1>
         <p class="lead styled">
                 Compare prices from more than 200 booking sites to find the lowest rate for the hotel that's right for you.
         </p>
@@ -440,7 +447,7 @@
         </div><!-- End promo_full_wp -->
     </div>
     </section><!-- End section -->    
-    
+     
     <div id="dtBox"></div><!-- End datepicker -->
     
      <footer >
@@ -504,93 +511,6 @@
     </footer><!-- End footer -->
 
 <div id="toTop"></div><!-- Back to top button -->
-
-<!-- modal register form -->
-
-<div id="modal-register" class="modal">
-  
-  <form class="modal-content animate"  method="POST" action="php/register.php">
-        
-    <div class="imgcontainerr">
-      <span onclick="document.getElementById('modal-register').style.display='none'" class="close" title="Close">&times;</span>
-      <img src="img/50.png" alt="Avatar" class="avatar">
-      <h1 style="font-family:Poppins;font-style:normal;text-align:center ; color: white;" >Register</h1>
-    </div>
-    
-
-    <div  class="containerr">
-    
-        <input type="text" placeholder="Enter name" name="name" id="t1">
-        <input type="text" placeholder="Enter lastname" name="lastname" id="t1">
-      <input type="text" placeholder="Enter Email" name="email" id="t1">
-      <input type="text" placeholder="Enter User name" name="username" id="t1">
-      <input type="password" placeholder="Enter Password" name="password" id="t1">
-      <input type="password" placeholder="Repeat your Password" name="password" id="t1">        
-      <input type="submit" id="b1" value="register"> 
-  
-      
-    </div>
-    
-  </form>
-  
-</div>
-
-<script>
-// If user clicks anywhere outside of the modal, Modal will close
-
-var modale = document.getElementById('modal-register');
-window.onclick = function(event) {
-    if (event.target == modale) {
-        modale.style.display = "none";
-    }
-}
-</script>
-
-
-<!-- modal login form -->
-<div id="modal-wrapper" class="modal">
-  
-  <form class="modal-content animate"  method="POST" action="php/sign.php">
-        
-    <div class="imgcontainerr">
-      <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close ">&times;</span>
-      <img src="img/50.png" alt="Avatar" class="avatar">
-      <h1 style="text-align:center ; color: white;" >Sign In</h1>
-    </div>
-
-    <div class="containerr">
-      <input type="text" placeholder="Enter Email" name="email" id="t1">
-      <input type="password" placeholder="Enter Password" name="password" id="t1">        
-      <input type="submit"  value="login" id="b1">
-      <input type="checkbox" name="remember" style="margin:26px 30px;"> <label style="color: white;">Remember me </label> 
-      <a href="forgot.php" style="color: white; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
-    </div>
-    
-  </form>
-  
-</div>
-
-<script>
-// If user clicks anywhere outside of the modal, Modal will close
-
-var modal = document.getElementById('modal-register');
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-<script>
-// If user clicks anywhere outside of the modal, Modal will close
-
-var modal = document.getElementById('modal-wrapper');
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-
 
         
 <!-- COMMON SCRIPTS -->

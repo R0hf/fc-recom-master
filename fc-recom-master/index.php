@@ -120,19 +120,18 @@
                         <div id="group_3">
                             <div id="container_5">
                                 <label>Search</label>
-                                <input type="text" class="form-control" name="name_booking" id="name_booking" placeholder="Ex : Algiers">
+                                <input type="Search" class="form-control" name="search_booking" id="name_booking" placeholder="ex : Algiers">
                             </div>
-                            
-                        </div><!-- End group_3 -->
+                          </div><!-- End group_3 -->
                         <div id="group_1">
                             <div id="container_1">
                                 <label>Arrival date</label>
-                                <input class="startDate1 form-control datepick" type="text" data-field="date" data-startend="start" data-startendelem=".endDate1" readonly placeholder="Arrival" id="check_in" name="check_in">
+                            	<input class="startDate1 form-control datepick" type="text" data-field="date" data-startend="start" data-startendelem=".endDate1" readonly placeholder="Arrival" id="check_in" name="check_in">
                                 <span class="input-icon"><i class="icon-calendar-7"></i></span>
                             </div>
                             <div id="container_2">
                                 <label>Departure date</label>
-                                 <input class="endDate1 form-control datepick" type="text" data-field="date" data-startend="end" data-startendelem=".startDate1" readonly placeholder="Departure" id="check_out" name="check_out">
+                                 <input class="endDate1 form-control datepick" type="text" data-field="date" data-startend="end" data-startendelem=".startDate1" readonly placeholder="Departure" id="check_out" name="check_out" >
                                 <span class="input-icon"><i class="icon-calendar-7"></i></span>
                             </div>
                         </div><!-- End group_1 -->
@@ -156,7 +155,7 @@
                         </div><!-- End group_2 -->
                         
                         <div id="container_7">
-                            <input  type="submit"  value="Search" class="btn_1" id="submit-booking">
+                            <input type="submit" value="Search" class="btn_1" id="submit-booking">
                         </div>
                     </form>
                     <div id="message-booking"></div>
@@ -198,18 +197,23 @@
 
         </div><!-- End row -->
     </div><!-- End container -->
-    
+     <?php
+                    include_once("/connect/connection.php");
+                    mysqli_query($connect,"UPDATE  viewcounter set views=views+1 where id='1' ");
+                    $r= mysqli_query($connect, "select * from room ");
+                    $l=mysqli_fetch_assoc($r);
+                    ?>
     <div class="container_styled_1">
         <div class="container margin_60">
             <div class="row">
                 <div class="col-md-5 col-md-offset-1">
-                    <figure class="room_pic"><a href="#"><img src="img/room_home_1.jpg" alt="" class="img-responsive"></a><span class="wow zoomIn" data-wow-delay="0.2s"><sup>$</sup>140<small>Per night</small></span></figure>
+                    <figure class="room_pic"><a href="#"><img src="<?php echo$l['img_link1']; ?>" alt="" class="img-responsive"></a><span class="wow zoomIn" data-wow-delay="0.2s"><sup>$</sup><?php echo$l['price']; ?><small>Per night</small></span></figure>
                 </div>
                 <div class="col-md-4 col-md-offset-1">
                     <div class="room_desc_home">
-                        <h3>Single Room </h3>
+                        <h3><?php echo$l['name']; ?> </h3>
                         <p>
-                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+                            
                         </p>
                         <ul>
                             <li>
