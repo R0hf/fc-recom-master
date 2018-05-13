@@ -121,11 +121,11 @@
         <div id="subheader_home">
             <div id="sub_content">
                 <div id="book_container">
-                    <form method="GET" action="home.php" id="check_avail_home" >
+                    <form action="home.php" method="get" autocomplete="off" >
                         <div id="group_3">
                             <div id="container_5">
                                 <label>Search</label>
-                                <input type="Search" class="form-control" name="search_booking" id="name_booking" placeholder="ex : Algiers">
+                                <input type="text" class="form-control" name="search_booking" id="name_booking" placeholder="ex : Algiers">
                             </div>
                           </div><!-- End group_3 -->
                         <div id="group_1">
@@ -161,8 +161,8 @@
                         
                         <div id="container_7">
                             
-                            <button  type="submit" name="srch" class="btn_1" id="submit-booking"> Search </button>
-                            
+                            <input  type="submit" name="srch" value="Search" class="btn_1" id="submit-booking">  
+                           
                         </div>
                     </form>
                     <div id="message-booking"></div>
