@@ -1,9 +1,14 @@
        <?php
-                    include_once("/connect/connection.php");
-                    mysqli_query($connect,"UPDATE  viewcounter set views=views+1 where id='1' ");
+                    include_once("connect/connection.php");
                     $r= mysqli_query($connect, "select * from client ");
                     $l=mysqli_fetch_assoc($r);
-                    ?>
+        ?>
+        <?php
+         include_once("connect/connection.php");
+         $city=$_GET['search_booking'] ;
+         $k=mysqli_query($connect, "SELECT * FROM hotel WHERE (`location_hotel` LIKE '%".$city."%')");
+         $countHotel=mysqli_num_rows($k); 
+          ?>
         <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
 <html>
@@ -54,7 +59,7 @@
     </div><!-- End Preload -->
     
      <!-- Header ================================================== -->
-    <header>
+ <header>
     <div class="container">
         <div class="row">
             <div class="col--md-3 col-sm-3 col-xs-3">
@@ -116,99 +121,87 @@
     </div><!-- End container -->
     </header>
     <!-- End Header =============================================== -->
-    
-	<!-- SubHeader =============================================== -->
-    <div class="parallax-window" id="booking" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="550">
-        <div id="subheader_home">
-            <div id="sub_content">
-                <div id="book_container">
-                    <form action="check_avail_home.php" method="get" autocomplete="off" >
-                        <div id="group_3">
-                            <div id="container_5">
-                                <label>Search</label>
-                                <input type="text" class="form-control" name="name_booking" id="name_booking" placeholder="ex : Algiers">
-                              
-                               </div>
-                            <div id="result"></div>
-                                
-                          </div><!-- End group_3 -->
-                        <div id="group_1">
-                            <div id="container_1">
-                                <label>Arrival date</label>
-                            	<input class="startDate1 form-control datepick" type="text" data-field="date" data-startend="start" data-startendelem=".endDate1" readonly placeholder="Arrival" id="check_in" name="check_in">
-                                <span class="input-icon"><i class="icon-calendar-7"></i></span>
+    <div class="row">
+                        <div class="col-lg-4">
+                            	<!-- SubHeader =============================================== -->
+                            <div class="container add_bottom_60" style="transform: none;">
+                                                          
+                                        <!-- End col -->
+                                        
+                                          <div class="col-md-4" id="sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+                                        <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; top: 80px; left: 884.5px;">
+                                            <div class="box_style_1">
+                                                <div id="message-booking"></div>
+                                                <form method="get" action="check_avail_home.php"  autocomplete="off">
+                                                <input name="room_type" id="room_type" type="hidden" value="Double room">   
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Arrival date</label>
+                                                                <input class="startDate1 form-control datepick" type="text" data-field="date" data-startend="start" data-startendelem=".endDate1" readonly="" placeholder="Arrival" id="check_in" name="check_in">
+                                                               <span class="input-icon"><i class="icon-calendar-7"></i></span>
+                                                               </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Departure date</label>
+                                                               <input class="endDate1 form-control datepick" type="text" data-field="date" data-startend="end" data-startendelem=".startDate1" readonly="" placeholder="Departure" id="check_out" name="check_out">
+                                                               <span class="input-icon"><i class="icon-calendar-7"></i></span>
+                                                           </div>
+                                                        </div>
+                                                    </div><!-- End row -->
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                                            <div class="form-group">
+                                                            <label>Adults</label>
+                                                               <div class="qty-buttons">
+                                                                    <input type="button" value="-" class="qtyminus" name="adults">
+                                                                    <input type="text" name="adults" id="adults" value="" class="qty form-control" placeholder="0">
+                                                                    <input type="button" value="+" class="qtyplus" name="adults">
+                                                                </div>
+                                                               </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                                            <div class="form-group">
+                                                            <label>Children</label>
+                                                                <div class="qty-buttons">
+                                                                    <input type="button" value="-" class="qtyminus" name="children">
+                                                                    <input type="text" name="children" id="children" value="" class="qty form-control" placeholder="0">
+                                                                    <input type="button" value="+" class="qtyplus" name="children">
+                                                                </div>
+                                                           </div>
+                                                        </div>
+                                                    </div><!-- End row -->
+                                                    <div class="row">
+                                                        
+                                                          <div class="col-md-12 col-sm-6">
+                                                               <div class="form-group">
+                                                                <label>search</label>
+                                                                   <input type="text" class="form-control" name="search_booking" id="name_booking" placeholder="ex : Algiers">
+                                                               </div>
+                                                               
+                                                               </div>
+                                                               <div class="col-md-12 col-sm-6"id="result"></div>
+                                                               <div class="col-md-12 col-sm-12">
+                                                               <div class="form-group">
+                                                               <input type="submit" value="Book now" class="btn_full" id="submit-booking">
+                                                               </div>
+                                                               </div>
+                                                         </div>
+                                                    </form>
+                                                    <hr>
+                                                    <a href="#0" class="btn_outline"> or Contact us</a>
+                                                    <a href="tel://004542344599" id="phone_2"><i class="icon_set_1_icon-91"></i>+45 423 445 99</a>
+                                                 
+                                            </div><!-- End box_style -->
+                                        </div><!-- End theiaStickySidebar -->
+                                        </div><!-- End col -->
+                                        
+                                        
                             </div>
-                            <div id="container_2">
-                                <label>Departure date</label>
-                                 <input class="endDate1 form-control datepick" type="text" data-field="date" data-startend="end" data-startendelem=".startDate1" readonly placeholder="Departure" id="check_out" name="check_out" >
-                                <span class="input-icon"><i class="icon-calendar-7"></i></span>
-                            </div>
-                        </div><!-- End group_1 -->
-                        <div id="group_2">
-                            <div id="container_3">
-                                <label>Adults</label>
-                                <div class="qty-buttons">
-                                    <input type="button" value="-" class="qtyminus" name="adults">
-                                    <input type="text" name="adults" id="adults" value="" class="qty form-control" placeholder="0">
-                                    <input type="button" value="+" class="qtyplus" name="adults">
-                                </div>
-                            </div>
-                            <div id="container_4">
-                                <label>Children</label>
-                                <div class="qty-buttons">
-                                    <input type="button" value="-" class="qtyminus" name="children">
-                                    <input type="text" name="children" id="children" value="" class="qty form-control" placeholder="0">
-                                    <input type="button" value="+" class="qtyplus" name="children">
-                                </div>
-                            </div>
-                        </div><!-- End group_2 -->
-                        
-                        <div id="container_7">
-                            
-                            <input  type="submit" name="srch" value="Search" class="btn_1" id="submit-booking">  
-                           
+                                <!-- End SubHeader ============================================ -->
                         </div>
-                    </form>
-                    <div id="message-booking"></div>
-                </div><!-- End book_container -->
-            </div><!-- End sub_content -->
-        </div><!-- End subheader -->
-    </div><!-- End parallax-window -->
-    <!-- End SubHeader ============================================ -->
-   
-<script>
-  $(document).ready(function(){
-
-   load_data();
-
-   function load_data(query)
-   {
-    $.ajax({
-     url:"res.php",
-     method:"POST",
-     data:{query:query},
-     success:function(data)
-     {
-      $('#result').html(data);
-     }
-    });
-   }
-   $('#name_booking').keyup(function(){
-    var search = $(this).val();
-    if(search != '')
-    {
-     load_data(search);
-    }
-    else
-    {
-     load_data();
-    }
-   });
-  });
-</script> 
-    <div class="container margin_60_35">
-        <div id="result"></div>   
-        <script src="js/jquery.min.js"></script>
+                         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
   
 <script>
@@ -241,194 +234,91 @@
    });
   });
 </script> 
-        <h1 class="main_title"><em></em>Welcome to DZ BOOKINg <span>World of Hotels</span></h1>
-        <p class="lead styled">
-                Compare prices from more than 200 booking sites to find the lowest rate for the hotel that's right for you.
-        </p>
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="mosaic_container">
-                    <img src="img/mosaic_1.jpg" alt="" class="img-responsive add_bottom_30"><span class="caption_2">Nice Outdoor</span>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="col-xs-12">
-                    <div class="mosaic_container">
-                        <img src="img/mosaic_2.jpg" alt="" class="img-responsive add_bottom_30"><span class="caption_2">Large Bedroom</span>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="mosaic_container">
-                        <img src="img/mosaic_3.jpg" alt="" class="img-responsive add_bottom_30"><span class="caption_2">Modern Bathroom</span>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="mosaic_container">
-                        <img src="img/mosaic_4.jpg" alt="" class="img-responsive add_bottom_30"><span class="caption_2">Wellness</span>
-                    </div>
-                </div>
+                        <div class="col-md-4">
+                            <div class="container margin_60_35">
+                                <h2>Welcome to <?php echo $city ; ?>'s hotels : <?php echo $countHotel;?> properties found</h2> 
 
-            </div>
+                             </div><!-- End container -->
+                            
+                          <?php
+                          while ( $row=mysqli_fetch_assoc($k))
+                                { 
+                           ?>
+                            
+                            <div class="container_styled_1">
+                                <div class="container margin_60">
+                                    <div class="row">
+                                        <div class="col-md-5 ">
+                                            <figure class="room_pic"><a href="#"><img src="img/room_home_2.jpg" alt="" class="img-responsive"></a><span class="wow zoomIn" data-wow-delay="0.2s"><sup>$</sup>200<small>Per night</small></span></figure>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <div class="room_desc_home">
+                                                <h3><?php echo $row['name_hotel']; ?> </h3><a class="btn_1_outline"> 8.5</a>
+                                                <p>
+                                                     <i class="icon-location"></i> <?php echo $row['address_hotel']; ?>
+                                                      <?php
+                                                        $star=$row['stars_hotel'];
+                                                        $i = 0 ;
+                                                        while ($i < $star ){ ?>
+                                                            <i class="icon-star"></i>
+                                                        <?php 
+                                                        $i = $i + 1 ;    
+                                                        } 
+                                                       ?>  
+                                                      
 
-        </div><!-- End row -->
-    </div><!-- End container -->
-    
-    <div class="container_styled_1">
-        <div class="container margin_60">
-            <div class="row">
-                <div class="col-md-5 col-md-offset-1">
-                    <figure class="room_pic"><a href="#"><img src="img/room_home_1.jpg" alt="" class="img-responsive"></a><span class="wow zoomIn" data-wow-delay="0.2s"><sup>$</sup>140<small>Per night</small></span></figure>
-                </div>
-                <div class="col-md-4 col-md-offset-1">
-                    <div class="room_desc_home">
-                        <h3>Single Room </h3>
-                        <p>
-                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-                        </p>
-                        <ul>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                                <div class="tooltip-content">
-                                    King size bed
-                                </div>
-                            </div>
-                            </li>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-118"></i></span>
-                                <div class="tooltip-content">
-                                    Shower
-                                </div>
-                            </div>
-                            </li>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                                <div class="tooltip-content">
-                                    Plasma TV
-                                </div>
-                            </div>
-                            </li>
-                        </ul>
-                        <a href="room_list.html" class="btn_1_outline">Read more</a>
-                    </div><!-- End room_desc_home -->
-                </div>
-            </div><!-- End row -->
-        </div><!-- End container -->
-    </div><!-- End container_styled_1 -->
-    
-    <div class="container margin_60">
-        <div class="row">
-            <div class="col-md-5 col-md-offset-1 col-md-push-5">
-                  <figure class="room_pic left"><a href="#"><img src="img/room_home_3.jpg" alt="" class="img-responsive"></a><span class="wow zoomIn" data-wow-delay="0.2s"><sup>$</sup>180<small>Per night</small></span></figure>
-            </div>
-            <div class="col-md-4 col-md-offset-1 col-md-pull-6">
-                <div class="room_desc_home">
-                    <h3>Double Room </h3>
-                    <p>
-                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-                    </p>
-                    <ul>
-                        <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                            <div class="tooltip-content">
-                                King size bed
-                            </div>
+                                                </p>
+                                                <ul>
+                                                    <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
+                                                        <div class="tooltip-content">
+                                                            King size bed
+                                                        </div>
+                                                    </div>
+                                                    </li>
+                                                    <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_2_icon-111"></i></span>
+                                                        <div class="tooltip-content">
+                                                            Bathtub
+                                                        </div>
+                                                    </div>
+                                                    </li>
+                                                    <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
+                                                        <div class="tooltip-content">
+                                                            Plasma TV
+                                                        </div>
+                                                    </div>
+                                                    </li>
+                                                    <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_1_icon-15"></i></span>
+                                                        <div class="tooltip-content">
+                                                            Welcome bottle
+                                                        </div>
+                                                    </div>
+                                                    </li>
+                                                    <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item"><i class="icon_set_2_icon-106"></i></span>
+                                                        <div class="tooltip-content">
+                                                            Safe box
+                                                        </div>
+                                                    </div>
+                                                    </li>
+                                                </ul>
+                                                <a href="hotel_detail.php ?id=<?php echo $row['id_hotel']?>" class="btn_1_outline">Read more</a>
+                                            </div><!-- End room_desc_home -->
+                                        </div>
+                                    </div><!-- End row -->
+                                </div><!-- End container -->
+                            </div><!-- End container_styled_1 -->
+                            <?php } ?>
                         </div>
-                        </li>
-                        <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-111"></i></span>
-                            <div class="tooltip-content">
-                                Bathtub
-                            </div>
-                        </div>
-                        </li>
-                        <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                            <div class="tooltip-content">
-                                Plasma TV
-                            </div>
-                        </div>
-                        </li>
-                        <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-106"></i></span>
-                            <div class="tooltip-content">
-                                Safe box
-                            </div>
-                        </div>
-                        </li>
-                    </ul>
-                    <a href="room_list.html" class="btn_1_outline">Read more</a>
-                </div><!-- End room_desc_home -->
-            </div>
-        </div><!-- End row -->
-    </div><!-- End container -->
-    
-    <div class="container_styled_1">
-        <div class="container margin_60">
-            <div class="row">
-                <div class="col-md-5 col-md-offset-1">
-                    <figure class="room_pic"><a href="#"><img src="img/room_home_2.jpg" alt="" class="img-responsive"></a><span class="wow zoomIn" data-wow-delay="0.2s"><sup>$</sup>200<small>Per night</small></span></figure>
-                </div>
-                <div class="col-md-4 col-md-offset-1">
-                    <div class="room_desc_home">
-                        <h3>Suite Room </h3>
-                        <p>
-                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-                        </p>
-                        <ul>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                                <div class="tooltip-content">
-                                    King size bed
-                                </div>
-                            </div>
-                            </li>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-111"></i></span>
-                                <div class="tooltip-content">
-                                    Bathtub
-                                </div>
-                            </div>
-                            </li>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                                <div class="tooltip-content">
-                                    Plasma TV
-                                </div>
-                            </div>
-                            </li>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_1_icon-15"></i></span>
-                                <div class="tooltip-content">
-                                    Welcome bottle
-                                </div>
-                            </div>
-                            </li>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-106"></i></span>
-                                <div class="tooltip-content">
-                                    Safe box
-                                </div>
-                            </div>
-                            </li>
-                        </ul>
-                        <a href="room_list.html" class="btn_1_outline">Read more</a>
-                    </div><!-- End room_desc_home -->
-                </div>
-            </div><!-- End row -->
-        </div><!-- End container -->
-    </div><!-- End container_styled_1 -->
+    </div>
     
     <section class="promo_full"><div class="promo_full_wp">
         <div>

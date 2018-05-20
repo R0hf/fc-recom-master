@@ -116,12 +116,15 @@
         <div id="subheader_home">
             <div id="sub_content">
                 <div id="book_container">
-                    <form method="post" action="assets/check_avail_home.php" id="check_avail_home" autocomplete="off">
+                    <form method="get" action="check_avail_home.php" autocomplete="off">
                         <div id="group_3">
                             <div id="container_5">
                                 <label>Search</label>
-                                <input type="Search" class="form-control" name="search_booking" id="name_booking" placeholder="ex : Algiers">
+                                <input type="text" class="form-control" name="search_booking" id="name_booking" placeholder="ex : Algiers">
                             </div>
+                            <div id="result"></div>
+                            <script src="js/jquery.min.js"></script>
+                        <script src="js/bootstrap.min.js"></script>
                           </div><!-- End group_3 -->
                         <div id="group_1">
                             <div id="container_1">
@@ -164,6 +167,36 @@
         </div><!-- End subheader -->
     </div><!-- End parallax-window -->
     <!-- End SubHeader ============================================ -->
+    <script>
+  $(document).ready(function(){
+
+   load_data();
+
+   function load_data(query)
+   {
+    $.ajax({
+     url:"res.php",
+     method:"POST",
+     data:{query:query},
+     success:function(data)
+     {
+      $('#result').html(data);
+     }
+    });
+   }
+   $('#name_booking').keyup(function(){
+    var search = $(this).val();
+    if(search != '')
+    {
+     load_data(search);
+    }
+    else
+    {
+     load_data();
+    }
+   });
+  });
+</script> 
             
     <div class="container margin_60_35">
         <h1 class="main_title"><em></em>Welcome to DZ BOOKINg <span>World of Hotels</span></h1>
