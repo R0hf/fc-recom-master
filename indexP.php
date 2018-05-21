@@ -131,11 +131,11 @@
         <div id="subheader_home">
             <div id="sub_content">
                 <div id="book_container">
-                    <form action="check_avail_home.php" method="get" autocomplete="off" >
+                    <form action="check_avail_home.php" method="GET" autocomplete="off" >
                         <div id="group_3">
                             <div id="container_5">
                                 <label>Search</label>
-                                <input type="text" class="form-control" name="name_booking" id="name_booking" placeholder="ex : Algiers">
+                                <input type="text" class="form-control" name="search_booking" id="name_booking" placeholder="ex : Algiers">
                               
                                </div>
                             

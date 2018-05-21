@@ -2,12 +2,13 @@
                     include_once("connect/connection.php");
                     $r= mysqli_query($connect, "select * from client ");
                     $l=mysqli_fetch_assoc($r);
-        ?>
-        <?php
-         include_once("connect/connection.php");
+       
+        if($_GET){
+        
          $city=$_GET['search_booking'] ;
          $k=mysqli_query($connect, "SELECT * FROM hotel WHERE (`location_hotel` LIKE '%".$city."%')");
          $countHotel=mysqli_num_rows($k); 
+       }
           ?>
         <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
@@ -132,7 +133,7 @@
                                         <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; top: 80px; left: 884.5px;">
                                             <div class="box_style_1">
                                                 <div id="message-booking"></div>
-                                                <form method="get" action="check_avail_home.php"  autocomplete="off">
+                                                <form method="GET" action="check_avail_home.php"  autocomplete="off">
                                                 <input name="room_type" id="room_type" type="hidden" value="Double room">   
                                                     <div class="row">
                                                         <div class="col-md-6 col-sm-6">
