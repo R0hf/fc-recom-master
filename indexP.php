@@ -8,6 +8,15 @@
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
 <html>
 <head>
+    <style type="text/css">
+    .rech{
+        font-size: 15px;
+        background-color: rgba(0,0,0,0.7);  
+        width: 39% ;
+        margin-left: 95px;
+        padding-left: 30px;
+            }
+    </style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -129,7 +138,7 @@
                                 <input type="text" class="form-control" name="name_booking" id="name_booking" placeholder="ex : Algiers">
                               
                                </div>
-                            <div id="result"></div>
+                            
                                 
                           </div><!-- End group_3 -->
                         <div id="group_1">
@@ -171,6 +180,9 @@
                     </form>
                     <div id="message-booking"></div>
                 </div><!-- End book_container -->
+
+                <div align="left" id="result" class="rech" ></div>
+
             </div><!-- End sub_content -->
         </div><!-- End subheader -->
     </div><!-- End parallax-window -->

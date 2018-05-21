@@ -33,6 +33,7 @@ if(mysqli_num_rows($result) > 0)
  
  while($row = mysqli_fetch_array($result))
  {
+
   $output .= '
    <tr>
     <td>'.$row["name_city"].'</td>
@@ -40,6 +41,7 @@ if(mysqli_num_rows($result) > 0)
    </tr>
   ';
  }
+ 
  echo $output;
 }
 
