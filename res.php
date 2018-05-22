@@ -16,15 +16,15 @@ if(isset($_POST["query"]))
 {
  $search = mysqli_real_escape_string($connect, $_POST["query"]);
  $query = "
-  SELECT name_city FROM city 
-  WHERE name_city LIKE '%".$search."%'
+  SELECT  DISTINCT location_hotel FROM hotel 
+  WHERE location_hotel LIKE '%".$search."%'
   
  ";
 }
 else
 {
  $query = "
-  SELECT name_city FROM city ORDER BY id_city LIMIT 0
+  SELECT   location_hotel FROM hotel ORDER BY hotelID LIMIT 0
  ";
 }
 $result = mysqli_query($connect, $query);
@@ -36,7 +36,7 @@ if(mysqli_num_rows($result) > 0)
 
   $output .= '
    <tr>
-    <td>'.$row["name_city"].'</td>
+    <td>'.$row["location_hotel"].'</td>
     
    </tr>
   ';

@@ -1,10 +1,12 @@
     <?php
                     include_once("/connect/connection.php");
-                    $r= mysqli_query($connect, "select * from client ");
-                    $l=mysqli_fetch_assoc($r);
+                    $sql1= mysqli_query($connect, "select * from client ");
+                    $c=mysqli_fetch_assoc($sql1);
                     $id = $_GET['id'] ;
-                    $p = mysqli_query($connect, "select * from hotel where `id_hotel` =".$id );
-                    $k = mysqli_fetch_assoc($p);
+                    $sql2 = mysqli_query($connect, "select * from room where `hotelID` =".$id );
+                    $r = mysqli_fetch_assoc($sql2);
+                    $sql3 = mysqli_query($connect, "select * from hotel where `hotelID` =".$id );
+                    $h = mysqli_fetch_assoc($sql3);
     ?>
 
  <!DOCTYPE html>
@@ -17,7 +19,7 @@
     <meta name="keywords" content="hotel, bed and breakfast, accommodations, travel, motel">
     <meta name="description" content="FC Recom - Hotel and Bed&amp;Breakfast">
     <meta name="author" content="Ansonika">
-   <title>DZ BOOKINg - <?php echo $k['name_hotel'] ?></title>
+   <title>DZ BOOKINg - <?php echo $h['name_hotel'] ?></title>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -101,7 +103,7 @@
                     </li>
                     <li><a href="contacts.html">Contacts</a></li>
                     <li class="submenu" id="profil">
-                    <a href="javascript:void(0);" class="show-submenu"><?php echo $l['username']; ?> <img src="<?php echo $l['img']; ?>"></a>
+                    <a href="javascript:void(0);" class="show-submenu"><?php echo $c['username']; ?> <img src="<?php echo $c['img']; ?>"></a>
                     <ul>
                         <li><a href="my/lite/index.php">My Profile</a> </li>
                         <li><a href="php/logout.php">Log Out</a></li>
@@ -118,15 +120,15 @@
     
     <!-- Set up your HTML -->
 <div class="carousel_in">
-      <div><img src="<?php echo $k['imgg']; ?>" alt=""><div class="caption"><h3>Fantastic bed room</h3></div></div>
-      <div><img src="<?php echo $k['imgg2']; ?>" alt=""><div class="caption"><h3>Equiped bathroom</h3></div></div>
-      <div><img src="<?php echo $k['imgg3']; ?>" alt=""><div class="caption"><h3>Equiped bathroom</h3></div></div>
+      <div><img src="<?php echo $h['imgg']; ?>" alt=""><div class="caption"><h3>Fantastic bed room</h3></div></div>
+      <div><img src="<?php echo $h['imgg2']; ?>" alt=""><div class="caption"><h3>Equiped bathroom</h3></div></div>
+      <div><img src="<?php echo $h['imgg3']; ?>" alt=""><div class="caption"><h3>Equiped bathroom</h3></div></div>
       <div><img src="img/room_detail_4.jpg" alt=""><div class="caption"><h3>Nice outdoor</h3></div></div>
       <div><img src="img/room_detail_5.jpg" alt=""><div class="caption"><h3>Swimming pool</h3></div></div>
     </div>
     
     
-    <h1 class="main_title_in"><?php echo $k['name_hotel'] ?></h1>
+    <h1 class="main_title_in"><?php echo $h['name_hotel'] ?></h1>
     <div class="container add_bottom_60">
         
         <div class="row">
@@ -147,18 +149,16 @@
                 </div>
                 <div class="col-md-9">
                     <p>
-                        Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi. Eu ponderum mediocrem has, vitae adolescens in pro. Mea liber ridens inermis ei, mei legendos vulputate an, labitur tibique te qui.  Ad cum movet fierent assueverit, mei stet legere ne. Mel at vide soluta, ut utamur antiopam inciderint sed. Ut iriure perpetua voluptaria has, vim postea denique in, mollis pertinax elaboraret sed in. Per no vidit timeam, quis omittam sed at.
+                        <?php echo $h['description_hotel'] ?>
                     </p>
                     <h4>Room facilities</h4>
-                    <p>
-                        Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
-                    </p>
+                    
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
                     	 <ul class="list_ok">
                                 <li>Coffee machine</li>
                                 <li>Wifi</li>
-                                <li>	Microwave</li>
+                                <li>Microwave</li>
                                 <li>Oven</li>
                             </ul>
                     </div>
@@ -185,15 +185,15 @@
                         <tbody>
                         <tr>
                             <td>Low (from 23/03 to 31/05)</td>
-                            <td>140$</td>
+                            <td><?php echo$h["price_adults"]?>$</td>
                         </tr>
                         <tr>
                             <td>Middle (from 23/03 to 31/05)</td>
-                            <td>180$</td>
+                            <td><?php echo$h["price_adults"]?>$</td>
                         </tr>
                         <tr>
                             <td>High (from 23/03 to 31/05)</td>
-                            <td>200$</td>
+                            <td><?php echo$h["price_adults"]?>$</td>
                         </tr>
                         </tbody>
                         </table>
@@ -310,7 +310,7 @@
             <div class="theiaStickySidebar">
             	<div class="box_style_1">
                     <div id="message-booking"></div>
-                    <form method="post" action="assets/check_avail.php" id="check_avail" autocomplete="off" >
+                    <form method="get" action="check_avail_home.php"  autocomplete="off" >
                     <input name="room_type" id="room_type" type="hidden" value="Double room">	
                     	<div class="row">
                         	<div class="col-md-6 col-sm-6">
@@ -350,20 +350,16 @@
                                </div>
                             </div>
                         </div><!-- End row -->
+
            				<div class="row">
                         	
                               <div class="col-md-12 col-sm-6">
                                    <div class="form-group">
-                                	<label>Name</label>
-                            	 		<input type="text" class="form-control" name="name_booking" id="name_booking" placeholder="Name and Last name">
+                                	<label>Search</label>
+                            	 		<input type="text" class="form-control" name="search_booking" id="name_booking" placeholder="<?php echo $h['location_hotel'] ?>">
                                    </div>
                                    </div>
-                                   <div class="col-md-12 col-sm-6">
-                                   <div class="form-group">
-                                	<label>Email</label>
-                            	 		<input type="text" class="form-control" name="email_booking" id="email_booking" placeholder="Your email">
-                                   </div>
-                                   </div>
+                                   <div class="col-md-12 col-sm-6"id="result"></div>
                                    <div class="col-md-12 col-sm-12">
                                    <div class="form-group">
                                    <input type="submit" value="Book now" class="btn_full" id="submit-booking">
@@ -382,7 +378,38 @@
         </div><!-- End row -->
                 
             </div><!-- End container -->
-    
+            <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    <script>
+  $(document).ready(function(){
+
+   load_data();
+
+   function load_data(query)
+   {
+    $.ajax({
+     url:"res.php",
+     method:"POST",
+     data:{query:query},
+     success:function(data)
+     {
+      $('#result').html(data);
+     }
+    });
+   }
+   $('#name_booking').keyup(function(){
+    var search = $(this).val();
+    if(search != '')
+    {
+     load_data(search);
+    }
+    else
+    {
+     load_data();
+    }
+   });
+  });
+</script> 
 
     
     <div id="dtBox"></div><!-- End datepicker -->
@@ -460,26 +487,9 @@
 			<div class="modal-body">
 				<div id="message-review">
 				</div>
-				<form method="post" action="assets/review.php" name="review" id="review">
+				<form method="post" action="review.php" name="review" id="review">
+					
 					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<input name="name_review" id="name_review" type="text" placeholder="Your name" class="form-control">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<input name="lastname_review" id="lastname_review" type="text" placeholder="Your last name" class="form-control">
-							</div>
-						</div>
-					</div>
-					<!-- End row -->
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<input name="email_review" id="email_review" type="email" placeholder="Your email" class="form-control">
-							</div>
-						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<select class="form-control" name="room_type_review" id="room_type_review">
