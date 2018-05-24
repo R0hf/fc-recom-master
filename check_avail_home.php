@@ -6,8 +6,25 @@
         if($_GET){
         
          $city=$_GET['search_booking'] ;
+         $date = $_GET['check_in'];
+         $date2 = $_GET['check_out'] ;
+         $child = (float)$_GET['children'] ; 
+         $adult = (float)$_GET['adults'] ;
+         $d1 = strtotime($date) ;
+         $d2 = strtotime($date2) ;
+         $diff = $d2 - $d1 ;
+         $nbr_days = abs(floor($diff /(60 * 60 * 24))) ;
+
          $k=mysqli_query($connect, "SELECT * FROM hotel WHERE (`location_hotel` LIKE '%".$city."%')");
+         while ($row = mysqli_fetch_assoc($k)) {
+            $id = $row['hotelID'] ;
+            $price = $nbr_days * (($child * $row['price_children']) + ($adult * $row['price_adults'])) ;
+            $sql = "UPDATE `hotel` SET `total` = '$price' WHERE `hotel`.`hotelID` = '$id'";
+            $resu=mysqli_query($connect,$sql) ;
+         }
+         $ord = mysqli_query($connect, "SELECT * FROM hotel WHERE (`location_hotel` LIKE '%".$city."%') ORDER BY total ASC ");
          $countHotel=mysqli_num_rows($k); 
+
        }
           ?>
         <!DOCTYPE html>
@@ -47,6 +64,39 @@
 </head>
 
 <body>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  
+<script>
+  $(document).ready(function(){
+
+   load_data();
+
+   function load_data(query)
+   {
+    $.ajax({
+     url:"res.php",
+     method:"POST",
+     data:{query:query},
+     success:function(data)
+     {
+      $('#result').html(data);
+     }
+    });
+   }
+   $('#name_booking').keyup(function(){
+    var search = $(this).val();
+    if(search != '')
+    {
+     load_data(search);
+    }
+    else
+    {
+     load_data();
+    }
+   });
+  });
+</script>
     
     <!--[if lte IE 8]>
         <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>.</p>
@@ -123,138 +173,110 @@
     </header>
     <!-- End Header =============================================== -->
     <div class="row">
-                        <div class="col-lg-4">
-                            	<!-- SubHeader =============================================== -->
-                            <div class="container add_bottom_60" style="transform: none;">
+        <div class="col-lg-4">
+          	<!-- SubHeader =============================================== -->
+            <div class="container add_bottom_60" style="transform: none;">
                                                           
-                                        <!-- End col -->
-                                        
-                                          <div class="col-md-4" id="sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
-                                        <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; top: 80px; left: 884.5px;">
-                                            <div class="box_style_1">
-                                                <div id="message-booking"></div>
-                                                <form method="GET" action="check_avail_home.php"  autocomplete="off">
-                                                <input name="room_type" id="room_type" type="hidden" value="Double room">   
-                                                    <div class="row">
-                                                        <div class="col-md-6 col-sm-6">
-                                                            <div class="form-group">
-                                                                <label>Arrival date</label>
-                                                                <input class="startDate1 form-control datepick" type="text" data-field="date" data-startend="start" data-startendelem=".endDate1" readonly="" placeholder="Arrival" id="check_in" name="check_in">
-                                                               <span class="input-icon"><i class="icon-calendar-7"></i></span>
-                                                               </div>
-                                                        </div>
-                                                        <div class="col-md-6 col-sm-6">
-                                                            <div class="form-group">
-                                                                <label>Departure date</label>
-                                                               <input class="endDate1 form-control datepick" type="text" data-field="date" data-startend="end" data-startendelem=".startDate1" readonly="" placeholder="Departure" id="check_out" name="check_out">
-                                                               <span class="input-icon"><i class="icon-calendar-7"></i></span>
-                                                           </div>
-                                                        </div>
-                                                    </div><!-- End row -->
-                                                    <div class="row">
-                                                        <div class="col-md-6 col-sm-6 col-xs-6">
-                                                            <div class="form-group">
-                                                            <label>Adults</label>
-                                                               <div class="qty-buttons">
-                                                                    <input type="button" value="-" class="qtyminus" name="adults">
-                                                                    <input type="text" name="adults" id="adults" value="" class="qty form-control" placeholder="0">
-                                                                    <input type="button" value="+" class="qtyplus" name="adults">
-                                                                </div>
-                                                               </div>
-                                                        </div>
-                                                        <div class="col-md-6 col-sm-6 col-xs-6">
-                                                            <div class="form-group">
-                                                            <label>Children</label>
-                                                                <div class="qty-buttons">
-                                                                    <input type="button" value="-" class="qtyminus" name="children">
-                                                                    <input type="text" name="children" id="children" value="" class="qty form-control" placeholder="0">
-                                                                    <input type="button" value="+" class="qtyplus" name="children">
-                                                                </div>
-                                                           </div>
-                                                        </div>
-                                                    </div><!-- End row -->
-                                                    <div class="row">
-                                                        
-                                                          <div class="col-md-12 col-sm-6">
-                                                               <div class="form-group">
-                                                                <label>search</label>
-                                                                   <input type="text" class="form-control" name="search_booking" id="name_booking" placeholder="ex : Algiers">
-                                                               </div>
-                                                               
-                                                               </div>
-                                                               <div class="col-md-12 col-sm-6"id="result"></div>
-                                                               <div class="col-md-12 col-sm-12">
-                                                               <div class="form-group">
-                                                               <input type="submit" value="Book now" class="btn_full" id="submit-booking">
-                                                               </div>
-                                                               </div>
-                                                         </div>
-                                                    </form>
-                                                    <hr>
-                                                    <a href="#0" class="btn_outline"> or Contact us</a>
-                                                    <a href="tel://004542344599" id="phone_2"><i class="icon_set_1_icon-91"></i>+45 423 445 99</a>
+            <!-- End col -->                         
+              <div class="col-md-4" id="sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+                  <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; top: 80px; left: 884.5px;">
+                      <div class="box_style_1">
+                        <div id="message-booking"></div>
+                          <form method="GET" action="check_avail_home.php"  autocomplete="off">
+                            <input name="room_type" id="room_type" type="hidden" value="Double room">   
+                                <div class="row">
+                                  <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                      <label>Arrival date</label>
+                                      <input class="startDate1 form-control datepick" type="text" data-field="date" data-startend="start" data-startendelem=".endDate1" readonly="" placeholder="Arrival" id="check_in" name="check_in">
+                                       <span class="input-icon"><i class="icon-calendar-7"></i></span>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                      <label>Departure date</label>
+                                      <input class="endDate1 form-control datepick" type="text" data-field="date" data-startend="end" data-startendelem=".startDate1" readonly="" placeholder="Departure" id="check_out" name="check_out">
+                                      <span class="input-icon"><i class="icon-calendar-7"></i></span>
+                                    </div>
+                                  </div>
+                                </div><!-- End row -->
+                                <div class="row">
+                                  <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <div class="form-group">
+                                      <label>Adults</label>
+                                      <div class="qty-buttons">
+                                        <input type="button" value="-" class="qtyminus" name="adults">
+                                        <input type="text" name="adults" id="adults" value="" class="qty form-control" placeholder="0">
+                                        <input type="button" value="+" class="qtyplus" name="adults">
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <div class="form-group">
+                                      <label>Children</label>
+                                      <div class="qty-buttons">
+                                        <input type="button" value="-" class="qtyminus" name="children">
+                                        <input type="text" name="children" id="children" value="" class="qty form-control" placeholder="0">
+                                        <input type="button" value="+" class="qtyplus" name="children">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div><!-- End row -->
+                                <div class="row">                      
+                                  <div class="col-md-12 col-sm-6">
+                                    <div class="form-group">
+                                      <label>search</label>
+                                      <input type="text" class="form-control" name="search_booking" id="name_booking" placeholder="ex : Algiers">
+                                    </div>                           
+                                  </div>
+                                  <div class="col-md-12 col-sm-6"id="result"></div>
+                                    <div class="col-md-12 col-sm-12">
+                                      <div class="form-group">
+                                        <input type="submit" value="Search" class="btn_full" id="submit-booking">
+                                      </div>
+                                    </div>
+                                </div>
+                          </form>
+                          <hr>
+                          <a href="#0" class="btn_outline"> or Contact us</a>
+                          <a href="tel://004542344599" id="phone_2"><i class="icon_set_1_icon-91"></i>+213 773 34 79 71</a>
                                                  
-                                            </div><!-- End box_style -->
-                                        </div><!-- End theiaStickySidebar -->
-                                        </div><!-- End col -->
-                                        
-                                        
-                            </div>
-                                <!-- End SubHeader ============================================ -->
-                        </div>
-                         <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-  
-<script>
-  $(document).ready(function(){
-
-   load_data();
-
-   function load_data(query)
-   {
-    $.ajax({
-     url:"res.php",
-     method:"POST",
-     data:{query:query},
-     success:function(data)
-     {
-      $('#result').html(data);
-     }
-    });
-   }
-   $('#name_booking').keyup(function(){
-    var search = $(this).val();
-    if(search != '')
-    {
-     load_data(search);
-    }
-    else
-    {
-     load_data();
-    }
-   });
-  });
-</script> 
+                      </div><!-- End box_style -->
+                  </div><!-- End theiaStickySidebar -->
+            </div><!-- End col -->               
+          </div>
+            <!-- End SubHeader ============================================ -->
+        </div>
+         
                         <div class="col-md-4">
                             <div class="container margin_60_35">
-                                <h2>Welcome to <?php echo $city ; ?>'s hotels : <?php echo $countHotel;?> properties found</h2> 
+                                <h2>Welcome to <?php echo $city ; ?>'s hotels : <?php echo $countHotel;?> Properties found </h2> 
 
                              </div><!-- End container -->
                             
                           <?php
-                          while ( $row=mysqli_fetch_assoc($k))
+                          while ( $row=mysqli_fetch_assoc($ord))
                                 { 
+                                  
                            ?>
                             
                             <div class="container_styled_1">
                                 <div class="container margin_60">
                                     <div class="row">
                                         <div class="col-md-5 ">
-                                            <figure class="room_pic"><a href="#"><img src="img/room_home_2.jpg" alt="" class="img-responsive"></a><span class="wow zoomIn" data-wow-delay="0.2s"><sup>$</sup>200<small>Per night</small></span></figure>
+                                            <figure class="room_pic"><a href="#"><img src="<?php echo $row['imgg'] ?>" alt="" class="img-responsive"></a>
+                                              <?php
+                                                if ($nbr_days > 0) {
+                                                ?>
+                                              <span class="wow zoomIn" data-wow-delay="0.2s"><?php echo $row['total'] ?><small>DZD</small></span></figure>
+                                              <?php } ?>
                                         </div>
                                         <div class="col-md-4 ">
                                             <div class="room_desc_home">
-                                                <h3><?php echo $row['name_hotel']; ?> </h3><a class="btn_1_outline"> 8.5</a>
+                                               <div class="cd">
+                                                <div ><h3><?php echo $row['name_hotel']; ?></h3></div>
+                                                 <div id="aaa"><span><?php echo $row['rate'] ?></span></div>
+                                               </div>
                                                 <p>
                                                      <i class="icon-location"></i> <?php echo $row['address_hotel']; ?>
                                                       <?php
@@ -267,8 +289,11 @@
                                                         } 
                                                        ?>  
                                                       
-
                                                 </p>
+                                                <p>
+                                                  <?php echo $row['description_hotel'] ?>
+                                                </p>
+                                                
                                                 <ul>
                                                     <li>
                                                     <div class="tooltip_styled tooltip-effect-4">
@@ -311,7 +336,7 @@
                                                     </div>
                                                     </li>
                                                 </ul>
-                                                <a href="hotel_detail.php ?id=<?php echo $row['id_hotel']?>" class="btn_1_outline">Read more</a>
+                                                <a href="hotel_detail.php ?id=<?php echo $row['hotelID']?>" class="btn_1_outline">Read more</a>
                                             </div><!-- End room_desc_home -->
                                         </div>
                                     </div><!-- End row -->
