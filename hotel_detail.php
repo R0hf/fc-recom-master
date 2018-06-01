@@ -1,12 +1,15 @@
     <?php
-                    include_once("/connect/connection.php");
-                    $sql1= mysqli_query($connect, "select * from client ");
-                    $c=mysqli_fetch_assoc($sql1);
-                    $id = $_GET['id'] ;
-                    $sql2 = mysqli_query($connect, "select * from room where `hotelID` =".$id );
-                    $r = mysqli_fetch_assoc($sql2);
-                    $sql3 = mysqli_query($connect, "select * from hotel where `hotelID` =".$id );
-                    $h = mysqli_fetch_assoc($sql3);
+            include_once("/connect/connection.php");
+            $sql1= mysqli_query($connect, "select * from client ");
+            $c=mysqli_fetch_assoc($sql1);
+            $id = $_GET['id'] ;
+            $sql2 = mysqli_query($connect, "select * from room where `hotelID` =".$id );
+            $r = mysqli_fetch_assoc($sql2);
+            $sql3 = mysqli_query($connect, "select * from hotel where `hotelID` =".$id );
+            $h = mysqli_fetch_assoc($sql3);
+
+            $sql4 = mysqli_query($connect, "select * from review where `hotelID` =".$id );
+            $count = mysqli_num_rows($sql4);
     ?>
 
  <!DOCTYPE html>
@@ -206,9 +209,20 @@
                 <div class="col-md-3">
                     <h3>Reviews</h3>
                     <a href="#" class="btn_1 add_bottom_15" data-toggle="modal" data-target="#myReview">Leave a review</a>
-                </div>
+                </div> 
                 <div class="col-md-9">
-                	<div id="score_detail"><span>7.5</span>Good <small>(Based on 34 reviews)</small></div><!-- End general_rating -->
+                	<div id="score_detail"><span><?php echo round($h['rate'], 1) ?></span>
+                        <?php
+                            $t = $h['rate'] ;
+                            if ( $t < 2 ) { echo "Low" ; }
+                            if ( $t >= 2 && $t < 4 ) { echo "Sufficient" ;}
+                            if ( $t >= 4 && $t < 6 ) { echo "Good" ; }
+                            if ( $t >= 6 && $t < 8 ) { echo "Excellent" ; }
+                            if ( $t >= 8  ) { echo "Super" ; } 
+                         ?> <small>(Based on <?php
+                                if($count == 0 ){ echo "24"; }
+                                else{ echo $count; } 
+                          ?> reviews)</small></div><!-- End general_rating -->
                     <div class="row" id="rating_summary">
                     	<div class="col-md-6">
                         	<ul>
@@ -362,14 +376,14 @@
                                    <div class="col-md-12 col-sm-6"id="result"></div>
                                    <div class="col-md-12 col-sm-12">
                                    <div class="form-group">
-                                   <input type="submit" value="Book now" class="btn_full" id="submit-booking">
+                                   <input type="submit" value="Search" class="btn_full" id="submit-booking">
                                    </div>
                                    </div>
                              </div>
                         </form>
                         <hr>
                         <a href="#0" class="btn_outline"> or Contact us</a>
-                        <a href="tel://004542344599" id="phone_2"><i class="icon_set_1_icon-91"></i>+45 423 445 99</a>
+                        <a href="tel://00213773347971" id="phone_2"><i class="icon_set_1_icon-91"></i>+213 773 34 79 71</a>
                      
                 </div><!-- End box_style -->
             </div><!-- End theiaStickySidebar -->
@@ -492,29 +506,15 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<select class="form-control" name="room_type_review" id="room_type_review">
-									<option value="">Select room type</option>
-									<option value="Single room">Single Room</option>
-									<option value="Double Room">Double Room</option>
-									<option value="King double room">King Double Room</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<!-- End row -->
-					<hr>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
 								<label>Position</label>
 								<select class="form-control" name="position_review" id="position_review">
-									<option value="">Please review</option>
-									<option value="Low">Low</option>
-									<option value="Sufficient">Sufficient</option>
-									<option value="Good">Good</option>
-									<option value="Excellent">Excellent</option>
-									<option value="Superb">Super</option>
-									<option value="Not rated">I don't know</option>
+									<option value="0">Please review</option>
+									<option value="1">Low</option>
+									<option value="2">Sufficient</option>
+									<option value="3">Good</option>
+									<option value="4">Excellent</option>
+									<option value="5">Super</option>
+									
 								</select>
 							</div>
 						</div>
@@ -522,13 +522,13 @@
 							<div class="form-group">
 								<label>Comfort</label>
 								<select class="form-control" name="comfort_review" id="comfort_review">
-									<option value="">Please review</option>
-									<option value="Low">Low</option>
-									<option value="Sufficient">Sufficient</option>
-									<option value="Good">Good</option>
-									<option value="Excellent">Excellent</option>
-									<option value="Superb">Super</option>
-									<option value="Not rated">I don't know</option>
+									<option value="0">Please review</option>
+									<option value="1">Low</option>
+									<option value="2">Sufficient</option>
+									<option value="3">Good</option>
+									<option value="4">Excellent</option>
+									<option value="5">Super</option>
+									
 								</select>
 							</div>
 						</div>
@@ -539,13 +539,13 @@
 							<div class="form-group">
 								<label>Price</label>
 								<select class="form-control" name="price_review" id="price_review">
-									<option value="">Please review</option>
-									<option value="Low">Low</option>
-									<option value="Sufficient">Sufficient</option>
-									<option value="Good">Good</option>
-									<option value="Excellent">Excellent</option>
-									<option value="Superb">Super</option>
-									<option value="Not rated">I don't know</option>
+									<option value="0">Please review</option>
+									<option value="1">Low</option>
+									<option value="2">Sufficient</option>
+									<option value="3">Good</option>
+									<option value="4">Excellent</option>
+									<option value="5">Super</option>
+									
 								</select>
 							</div>
 						</div>
@@ -553,13 +553,13 @@
 							<div class="form-group">
 								<label>Quality</label>
 								<select class="form-control" name="quality_review" id="quality_review">
-									<option value="">Please review</option>
-									<option value="Low">Low</option>
-									<option value="Sufficient">Sufficient</option>
-									<option value="Good">Good</option>
-									<option value="Excellent">Excellent</option>
-									<option value="Superb">Super</option>
-									<option value="Not rated">I don't know</option>
+									<option value="0">Please review</option>
+									<option value="1">Low</option>
+									<option value="2">Sufficient</option>
+									<option value="3">Good</option>
+									<option value="4">Excellent</option>
+									<option value="5">Super</option>
+									
 								</select>
 							</div>
 						</div>
@@ -569,7 +569,7 @@
 						<textarea name="review_text" id="review_text" class="form-control" style="height:100px" placeholder="Write your review"></textarea>
 					</div>
 					<div class="form-group">
-						<input type="text" id="verify_review" class="form-control" placeholder="Are you human? 3 + 1 =">
+						<input type="text" name="verify_review" id="verify_review" class="form-control" value="<?php echo $id  ?>">
 					</div>
 					<input type="submit" value="Submit" class="btn_1" id="submit-review">
 				</form>

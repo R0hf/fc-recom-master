@@ -275,7 +275,7 @@
                                             <div class="room_desc_home">
                                                <div class="cd">
                                                 <div ><h3><?php echo $row['name_hotel']; ?></h3></div>
-                                                 <div id="aaa"><span><?php echo $row['rate'] ?></span></div>
+                                                 <div id="aaa"><span><?php echo round($row['rate'], 1) ?></span></div>
                                                </div>
                                                 <p>
                                                      <i class="icon-location"></i> <?php echo $row['address_hotel']; ?>
