@@ -10,6 +10,21 @@
 
             $sql4 = mysqli_query($connect, "select * from review where `hotelID` =".$id );
             $count = mysqli_num_rows($sql4);
+
+            
+            if( $count != 0 ){
+                $price = 0 ; $quality = 0 ; $comfort = 0 ; $position = 0 ;
+            while ($row = mysqli_fetch_assoc($sql4)) {
+                $price = $price + $row['rPrice'] ;
+                $quality = $quality + $row['rQuality'] ;
+                $comfort = $comfort + $row['rComfort'] ;
+                $position = $position + $row['rPosition'] ;
+            }
+            $Tprice = $price / $count ;
+            $Tcomfort = $comfort / $count ;
+            $Tposition = $position / $count ;
+            $Tquality = $quality / $count ;
+            }  
     ?>
 
  <!DOCTYPE html>
@@ -228,12 +243,36 @@
                         	<ul>
                             	<li>Position
                                     <div class="rating">
+                                        <?php if($count == 0 ){ ?>
                                             <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-empty"></i><i class="icon-star-empty"></i>
+                                        <?php }
+                                            else{
+                                                for ($i=0; $i < 5 ; $i++) { 
+                                                    if( $Tposition >= $i){ ?>
+                                                        <i class="icon-star"></i>
+                                                    <?php }
+                                                    else{ ?> <i class="icon-star-empty"></i> 
+                                                    <?php }
+                                                }
+                                            }
+                                         ?>    
                                     </div>
                                 </li>
                                 <li>Comfort
-                                <div class="rating">
-                                            <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-empty"></i>
+                                    <div class="rating">
+                                        <?php if($count == 0 ){ ?>
+                                            <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-empty"></i><i class="icon-star-empty"></i>
+                                        <?php }
+                                            else{
+                                                for ($i=0; $i < 5 ; $i++) { 
+                                                    if( $Tcomfort >= $i){ ?>
+                                                        <i class="icon-star"></i>
+                                                    <?php }
+                                                    else{ ?> <i class="icon-star-empty"></i> 
+                                                    <?php }
+                                                }
+                                            }
+                                         ?>    
                                     </div>
                                 </li>
                             </ul>
@@ -241,13 +280,37 @@
                         <div class="col-md-6">
                         	<ul>
                             	<li>Price
-                                <div class="rating">
+                                    <div class="rating">
+                                        <?php if($count == 0 ){ ?>
                                             <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-empty"></i><i class="icon-star-empty"></i>
+                                        <?php }
+                                            else{
+                                                for ($i=0; $i < 5 ; $i++) { 
+                                                    if( $Tprice >= $i){ ?>
+                                                        <i class="icon-star"></i>
+                                                    <?php }
+                                                    else{ ?> <i class="icon-star-empty"></i> 
+                                                    <?php }
+                                                }
+                                            }
+                                         ?>    
                                     </div>
                                 </li>
                                 <li>Quality
                                 <div class="rating">
-                                            <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-empty"></i>
+                                        <?php if($count == 0 ){ ?>
+                                            <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-empty"></i><i class="icon-star-empty"></i>
+                                        <?php }
+                                            else{
+                                                for ($i=0; $i < 5 ; $i++) { 
+                                                    if( $Tquality >= $i){ ?>
+                                                        <i class="icon-star"></i>
+                                                    <?php }
+                                                    else{ ?> <i class="icon-star-empty"></i> 
+                                                    <?php }
+                                                }
+                                            }
+                                         ?>    
                                     </div>
                                 </li>
                             </ul>
