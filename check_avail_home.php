@@ -183,7 +183,7 @@
                       <div class="box_style_1">
                         <div id="message-booking"></div>
                           <form method="GET" action="check_avail_home.php"  autocomplete="off">
-                            <input name="room_type" id="room_type" type="hidden" value="Double room">   
+                               
                                 <div class="row">
                                   <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
@@ -248,104 +248,126 @@
             <!-- End SubHeader ============================================ -->
         </div>
          
-                        <div class="col-md-4">
-                            <div class="container margin_60_35">
-                                <h2>Welcome to <?php echo $city ; ?>'s hotels : <?php echo $countHotel;?> Properties found </h2> 
+      <div class="col-md-4">
+          <div class="container margin_60_35">
+              <h2>Welcome to <?php echo $city ; ?>'s hotels : <?php echo $countHotel;?> Properties found </h2> 
 
-                             </div><!-- End container -->
-                            
-                          <?php
-                          while ( $row=mysqli_fetch_assoc($ord))
-                                { 
-                                  
-                           ?>
-                            
-                            <div class="container_styled_1">
-                                <div class="container margin_60">
-                                    <div class="row">
-                                        <div class="col-md-5 ">
-                                            <figure class="room_pic"><a href="#"><img src="<?php echo $row['imgg'] ?>" alt="" class="img-responsive"></a>
-                                              <?php
-                                                if ($nbr_days > 0) {
-                                                ?>
-                                              <span class="wow zoomIn" data-wow-delay="0.2s"><?php echo $row['total'] ?><small>DZD</small></span></figure>
-                                              <?php } ?>
-                                        </div>
-                                        <div class="col-md-4 ">
-                                            <div class="room_desc_home">
-                                               <div class="cd">
-                                                <div ><h3><?php echo $row['name_hotel']; ?></h3></div>
-                                                 <div id="aaa"><span><?php echo round($row['rate'], 1) ?></span></div>
-                                               </div>
-                                                <p>
-                                                     <i class="icon-location"></i> <?php echo $row['address_hotel']; ?>
-                                                      <?php
-                                                        $star=$row['stars_hotel'];
-                                                        $i = 0 ;
-                                                        while ($i < $star ){ ?>
-                                                            <i class="icon-star"></i>
-                                                        <?php 
-                                                        $i = $i + 1 ;    
-                                                        } 
-                                                       ?>  
-                                                      
-                                                </p>
-                                                <p>
-                                                  <?php echo $row['description_hotel'] ?>
-                                                </p>
-                                                
-                                                <ul>
-                                                    <li>
-                                                    <div class="tooltip_styled tooltip-effect-4">
-                                                        <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                                                        <div class="tooltip-content">
-                                                            King size bed
-                                                        </div>
-                                                    </div>
-                                                    </li>
-                                                    <li>
-                                                    <div class="tooltip_styled tooltip-effect-4">
-                                                        <span class="tooltip-item"><i class="icon_set_2_icon-111"></i></span>
-                                                        <div class="tooltip-content">
-                                                            Bathtub
-                                                        </div>
-                                                    </div>
-                                                    </li>
-                                                    <li>
-                                                    <div class="tooltip_styled tooltip-effect-4">
-                                                        <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                                                        <div class="tooltip-content">
-                                                            Plasma TV
-                                                        </div>
-                                                    </div>
-                                                    </li>
-                                                    <li>
-                                                    <div class="tooltip_styled tooltip-effect-4">
-                                                        <span class="tooltip-item"><i class="icon_set_1_icon-15"></i></span>
-                                                        <div class="tooltip-content">
-                                                            Welcome bottle
-                                                        </div>
-                                                    </div>
-                                                    </li>
-                                                    <li>
-                                                    <div class="tooltip_styled tooltip-effect-4">
-                                                        <span class="tooltip-item"><i class="icon_set_2_icon-106"></i></span>
-                                                        <div class="tooltip-content">
-                                                            Safe box
-                                                        </div>
-                                                    </div>
-                                                    </li>
-                                                </ul>
-                                                <a href="hotel_detail.php ?id=<?php echo $row['hotelID']?>" class="btn_1_outline">Read more</a>
-                                            </div><!-- End room_desc_home -->
-                                        </div>
-                                    </div><!-- End row -->
-                                </div><!-- End container -->
-                            </div><!-- End container_styled_1 -->
+           </div><!-- End container -->
+          
+        <?php
+        while ( $row=mysqli_fetch_assoc($ord))
+              { 
+                
+         ?>
+          
+          <div class="container_styled_1">
+              <div class="container margin_60">
+                  <div class="row">
+                      <div class="col-md-5 ">
+                          <figure class="room_pic"><img src="<?php echo $row['imgg'] ?>" alt="" class="img-responsive">
+                            <?php
+                              if ($nbr_days > 0) {
+                              ?>
+                            <span class="wow zoomIn" data-wow-delay="0.2s"><?php echo $row['total'] ?><small>DZD</small></span></figure>
                             <?php } ?>
-                        </div>
+                      </div>
+                      <div class="col-md-4 ">
+                          <div class="room_desc_home">
+                             <div class="cd">
+                              <div class="hotel_name"><h3><?php echo $row['name_hotel']; ?></h3></div>
+                               <div id="aaa">
+                                <?php
+                                  $t = $row['rate'] ;
+                                  if ( $t < 2 ) { echo "Low" ; $co = "#c94a30"; }
+                                  if ( $t >= 2 && $t < 4 ) { echo "Sufficient" ; $co="#f48f00";}
+                                  if ( $t >= 4 && $t < 6 ) { echo "Good" ; $co="#ed5434"; }
+                                  if ( $t >= 6 && $t < 8 ) { echo "Excellent" ; $co="#0b9808"; }
+                                  if ( $t >= 8  ) { echo "Super" ; $co = "#061798"; } 
+                                ?>
+                                <span style="background-color:<?php echo $co; ?> "><?php echo round($row['rate'], 1) ?></span></div>
+                             </div>
+                              <p>
+                                   <i class="icon-location" style="color: #0836ff"></i> <?php echo $row['address_hotel']; 
+                                      
+                                      $star=$row['stars_hotel'];
+                                      $i = 0 ;
+                                      while ($i < $star ){ ?>
+                                          <i class="icon-star" style="color:#F90;"></i>
+                                      <?php 
+                                      $i = $i + 1 ;    
+                                      } 
+                                     ?>  
+                                    
+                              </p>
+                              <p>
+                                <?php echo $row['description_hotel'] ?>
+                              </p>
+                              
+                              <ul>
+                                  <li>
+                                  <div class="tooltip_styled tooltip-effect-4">
+                                      <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
+                                      <div class="tooltip-content">
+                                          King size bed
+                                      </div>
+                                  </div>
+                                  </li>
+                                  <li>
+                                  <div class="tooltip_styled tooltip-effect-4">
+                                      <span class="tooltip-item"><i class="icon_set_2_icon-111"></i></span>
+                                      <div class="tooltip-content">
+                                          Bathtub
+                                      </div>
+                                  </div>
+                                  </li>
+                                  <li>
+                                  <div class="tooltip_styled tooltip-effect-4">
+                                      <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
+                                      <div class="tooltip-content">
+                                          Plasma TV
+                                      </div>
+                                  </div>
+                                  </li>
+                                  <li>
+                                  <div class="tooltip_styled tooltip-effect-4">
+                                      <span class="tooltip-item"><i class="icon_set_1_icon-15"></i></span>
+                                      <div class="tooltip-content">
+                                          Welcome bottle
+                                      </div>
+                                  </div>
+                                  </li>
+                                  <li>
+                                  <div class="tooltip_styled tooltip-effect-4">
+                                      <span class="tooltip-item"><i class="icon_set_2_icon-106"></i></span>
+                                      <div class="tooltip-content">
+                                          Safe box
+                                      </div>
+                                  </div>
+                                  </li>
+                              </ul>
+                              <div class="btnn">
+                                <div>
+                                  <a href="hotel_detail.php ?id=<?php echo $row['hotelID']?>" class="btn_1_outline">Read more</a>
+                                </div>
+                                <div>
+                                  <span><i class="icon-heart-empty" id="favorite" style="font-size: 30px;color: #ed5434;cursor: pointer;" onclick="trans();" title="Add to favorite "></i></span>
+                                </div>  
+                              </div>
+                          </div><!-- End room_desc_home -->
+                      </div>
+                  </div><!-- End row -->
+              </div><!-- End container -->
+          </div><!-- End container_styled_1 -->
+          <?php } ?>
+      </div>
     </div>
-    
+    <script >
+      function trans(){
+        gelb = document.getElementById('favorite') 
+        if (gelb.className == "icon-heart") { gelb.className = "icon-heart-empty"  }
+        else { gelb.className = "icon-heart"  }
+      }
+    </script>
     <section class="promo_full"><div class="promo_full_wp">
         <div>
             <h3>What Clients say<span>Id tale utinam ius, an mei omnium recusabo iracundia.</span></h3>
