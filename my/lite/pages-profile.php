@@ -1,3 +1,14 @@
+
+<?php
+session_start();
+ if(!isset($_SESSION['email'])){
+    header("location:../../indexP.php");
+}else{
+$email = $_SESSION['email'] ;
+include_once("../../connect/connection.php");
+                    $r= mysqli_query($connect, "SELECT * from client WHERE email ='$email' ");
+                    $l=mysqli_fetch_assoc($r);
+ ?>
         <!DOCTYPE html>
 <html lang="en">
 
@@ -74,11 +85,6 @@
                                 <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a>
                             </form>
                         </li>
-                        <?php
-                    include_once("../../connect/connection.php");
-                    $r= mysqli_query($connect, "select * from client ");
-                    $l=mysqli_fetch_assoc($r);
-                    ?>
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
@@ -144,7 +150,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <center class="m-t-30"> <img src="<?php echo$l['img'] ?>" class="img-circle" width="150" />
-                                    <h4 class="card-title m-t-10"><?php echo$l['name'].' '.$l['lastname']?></h4>
+                                    <h4 class="card-title m-t-10"><?php echo$l['email'].' '.$l['lastname']?></h4>
                                     <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
                                     <div class="row text-center justify-content-md-center">
                                         <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium"></font></a></div>
@@ -160,7 +166,7 @@
                     <div class="col-lg-8 col-xlg-9 col-md-7">
                         <div class="card">
                             <div class="card-body">
-                                <form class="form-horizontal form-material" method="POST" enctype="multipart/form-data" action="update-admin.php?id=<?php echo$l['id']?>">
+                                <form class="form-horizontal form-material" method="POST" enctype="multipart/form-data" action="update-admin.php?id=<?php echo $l['clientID']; ?>">
                                     <div class="form-group">
                                         <label class="col-md-12">Name</label>
                                         <div class="col-md-12">
@@ -191,20 +197,7 @@
                                             <input type="password" name="password" value="<?php echo $l['password']?>" class="form-control form-control-line">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-12">Select Country</label>
-                                        <div class="col-sm-12">
-                                            <select class="form-control form-control-line">
-                                                <option>Algeria</option>
-                                                <option>Tunisia</option>
-                                                <option>Maroco</option>
-                                                <option>France</option>
-                                                <option>Usa</option>
-                                                <option>Canada</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
+                                     <div class="form-group">
                                         <label class="col-sm-12">Profil picture :</label>
                                         <div >
                                          <label class="col-sm-12">
@@ -268,3 +261,4 @@
 </body>
 
 </html>
+<?php }?>

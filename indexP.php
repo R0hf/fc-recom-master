@@ -83,7 +83,7 @@
                     <li><a href="contacts.php">Contacts<i class="icon-mail-alt"></i></a></li>
                     <?php if (isset($_SESSION['email'])){ ?>
                     <li class="submenu" id="profil">
-                    <a href="javascript:void(0);" class="show-submenu"><?php echo $l['username']; ?> <img src="<?php echo $l['img']; ?>"></a>
+                    <a href="javascript:void(0);" class="show-submenu"><?php echo $l['username']; ?> <img width="40px" src="my/lite/<?php echo $l['img'];?>"></a>
                     <ul>
                         <li><a href="my/lite/index.php">My Profile</a> </li>
                         <li><a href="php/logout.php">Log Out</a></li>

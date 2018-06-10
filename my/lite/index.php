@@ -1,3 +1,13 @@
+<?php
+session_start();
+ if(!isset($_SESSION['email'])){
+    header("location:../../indexP.php");
+}else{
+$email = $_SESSION['email'] ;
+include_once("../../connect/connection.php");
+                    $r= mysqli_query($connect, "SELECT * from client WHERE email ='$email' ");
+                    $l=mysqli_fetch_assoc($r);
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,11 +98,7 @@
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
-                        <?php
-                    include_once("../../connect/connection.php");
-                    $r= mysqli_query($connect, "select * from client ");
-                    $l=mysqli_fetch_assoc($r);
-                    ?>
+                        
                         <li class="nav-item">
                             <a class="nav-link waves-effect waves-dark" href="#"><img src="<?php echo$l['img'];?>" alt="user" class="profile-pic" /></a>
                         </li>
@@ -223,3 +229,4 @@
 </body>
 
 </html>
+<?php }?>

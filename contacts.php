@@ -75,7 +75,7 @@ session_start();
                     <li><a href="contacts.php">Contacts<i class="icon-mail-alt"></i></a></li>
                     <?php if (isset($_SESSION['email'])){ ?>
                     <li class="submenu" id="profil">
-                    <a href="javascript:void(0);" class="show-submenu"><?php echo $c['username']; ?> <img src="<?php echo $c['img']; ?>"></a>
+                    <a href="javascript:void(0);" class="show-submenu"><?php echo $c['username']; ?> <img width="40px" src="my/lite/<?php echo $c['img'];?>"></a>
                     <ul>
                         <li><a href="my/lite/index.php">My Profile</a> </li>
                         <li><a href="php/logout.php">Log Out</a></li>
@@ -120,7 +120,7 @@ session_start();
                 <form action="http://maps.google.com/maps" method="get" target="_blank">
                 	<div class="form-group">
 					<input type="text" name="saddr" placeholder="Enter your starting point" class="form-control" />
-					<input type="hidden" name="daddr" value="New York, NY 11430"/><!-- Write here your end point -->
+					<input type="hidden" name="daddr" value=""/><!-- Write here your end point -->
                     </div>
                     <div class="form-group">
 					<button class="btn_1" type="submit" value="Get directions">Get directions</button>

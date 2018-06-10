@@ -1,8 +1,9 @@
 <?php
+session_start();
 if($_GET){
 $id = $_GET['id'];
 	include_once("../../connect/connection.php");
-		$sql = "SELECT * FROM client where id=".$id;
+		$sql = "SELECT * FROM client where clientID=".$id;
 			$r=mysqli_query($connect, $sql);
 			}
 			$directory = "../../img/";
@@ -18,7 +19,7 @@ $ext =  $pathparts['extension'];
 if($ext == "jpg" || $ext == "png") {
 	move_uploaded_file($_FILES["fileto"]["tmp_name"], $file);
 		include_once("../connect/connection.php");
-		$sql1="SELECT * FROM client WHERE id='$id'";
+		$sql1="SELECT * FROM client WHERE clientID='$id'";
 		$i=mysqli_query($connect, $sql1);
 		if($row=mysqli_fetch_assoc($i)){
 			$imgh=$row["img"];
@@ -27,7 +28,7 @@ if($ext == "jpg" || $ext == "png") {
 			}
 			 ;
 		}
-		$sql = "UPDATE client  set name='$name',lastname='$lastname',email='$email',username='$username',password='$password',img='$file' where id='$id'";	
+		$sql = "UPDATE client  set name='$name',lastname='$lastname',email='$email',username='$username',password='$password',img='$file' where clientID='$id'";	
 		$r=mysqli_query($connect, $sql);
 		
 			header("location:pages-profile.php");

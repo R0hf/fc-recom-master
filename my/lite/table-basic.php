@@ -1,3 +1,8 @@
+<?php
+session_start();
+ if(!isset($_SESSION['email'])){
+    header("location:../../indexP.php");
+}else{ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -242,3 +247,4 @@
 </body>
 
 </html>
+<?php }?>
