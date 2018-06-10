@@ -8,9 +8,17 @@
                     $l=mysqli_fetch_assoc($r);
                     $clientID = $l['clientID'] ;
                   $sql2 = mysqli_query($connect, "SELECT * FROM favourite WHERE clientID = '$clientID' ");
-                    while ( $mk = mysqli_fetch_row($sql2)){
-                      
+                  $cpt = mysqli_num_rows($sql2) ;
+                  $fav = array() ;
+                  if ($cpt > 0 ){
+                    $i = 0;
+                    while ( $mk = mysqli_fetch_assoc($sql2)){
+                      $fav[$i] = $mk['hotelID'] ;
+                      $i = $i + 1 ;
                     }
+                  }
+                  $len = count($fav) ;
+                  
                   }
        
         if($_GET){
@@ -342,7 +350,18 @@
                                 </div>
                                 <div>
                                   <?php if(isset($_SESSION['email'])){ ?>
-                                  <span><i class="icon-heart-empty" id="<?php echo $row['hotelID']?>" style="font-size: 30px;color: #ed5434;cursor: pointer;" onclick="trans(this)" title="<?php echo $clientID ?>" ></i></span>
+                                  <span><i class="<?php if($len == 0){
+                                            echo "icon-heart-empty";
+                                          }else{ $ress = 0;
+                                           for($i = 0 ; $i < $len ; $i++){
+                                            if($fav[$i] == $row['hotelID']){
+                                              $ress = 1 ;
+                                            }
+                                            }
+                                            if($ress == 1){ echo "icon-heart"; }
+                                            else{ echo "icon-heart-empty"; }
+                                          }?>" id="<?php echo $row['hotelID']?>" style="font-size: 30px;color: #ed5434;cursor: pointer;" onclick="trans(this)" title="<?php echo $clientID ?>" ></i></span>
+                                  
                                   <?php } ?>
                                 </div>                             
                               </div>
