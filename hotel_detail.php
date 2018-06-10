@@ -1,7 +1,14 @@
     <?php
+            session_start();
             include_once("/connect/connection.php");
-            $sql1= mysqli_query($connect, "select * from client ");
-            $c=mysqli_fetch_assoc($sql1);
+            if (isset($_SESSION['email'])){
+                   $email = $_SESSION['email'] ;
+                                 
+                   $r= mysqli_query($connect, "SELECT * FROM client WHERE email = '$email' ");
+                    $c=mysqli_fetch_assoc($r);
+                  }
+
+            
             $id = $_GET['id'] ;
             $sql2 = mysqli_query($connect, "select * from room where `hotelID` =".$id );
             $r = mysqli_fetch_assoc($sql2);
@@ -77,7 +84,8 @@
     <div class="container">
         <div class="row">
             <div class="col--md-3 col-sm-3 col-xs-3">
-                <a href="indexP.php" id="logo">
+                <a href="<?php if(isset($_SESSION['email'])){ echo "indexP.php"; }
+                        else{ echo "index.php" ; } ?>" id="logo">
                 <img src="img/logoN.png" width="190" height="23" alt="" data-retina="true">
                 </a>
             </div>
@@ -120,13 +128,18 @@
                     </ul>
                     </li>
                     <li><a href="contacts.html">Contacts</a></li>
+                    <?php if (isset($_SESSION['email'])){ ?>
                     <li class="submenu" id="profil">
                     <a href="javascript:void(0);" class="show-submenu"><?php echo $c['username']; ?> <img src="<?php echo $c['img']; ?>"></a>
                     <ul>
                         <li><a href="my/lite/index.php">My Profile</a> </li>
                         <li><a href="php/logout.php">Log Out</a></li>
                     </ul>  
-                    </li>  
+                    </li>
+                    <?php }else{ ?>
+                      <button onclick="document.getElementById('modal-wrapper').style.display='block'" class="btn_1" >Sign in</button>
+                    <button onclick="document.getElementById('modal-register').style.display='block'" class="btn_1" >Register</button>
+                    <?php } ?>  
                 </ul>
             </div><!-- End main-menu -->
             
@@ -223,7 +236,9 @@
             <div class="row">
                 <div class="col-md-3">
                     <h3>Reviews</h3>
+                    <?php if(isset($_SESSION['email'])) { ?>
                     <a href="#" class="btn_1 add_bottom_15" data-toggle="modal" data-target="#myReview">Leave a review</a>
+                    <?php } ?>
                 </div> 
                 <div class="col-md-9">
                 	<div id="score_detail"><span><?php echo round($h['rate'], 1) ?></span>
@@ -552,7 +567,7 @@
     </footer><!-- End footer -->
 
 <div id="toTop"></div><!-- Back to top button -->
-
+<?php if(isset($_SESSION['email'])) { ?>
 <!-- Modal Review -->
 <div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -632,7 +647,7 @@
 						<textarea name="review_text" id="review_text" class="form-control" style="height:100px" placeholder="Write your review"></textarea>
 					</div>
 					<div class="form-group">
-						<input type="text" name="verify_review" id="verify_review" class="form-control" value="<?php echo $id  ?>">
+						<input type="hidden" name="verify_review" id="verify_review" class="form-control" value="<?php echo $id  ?>">
 					</div>
 					<input type="submit" value="Submit" class="btn_1" id="submit-review">
 				</form>
@@ -640,6 +655,97 @@
 		</div>
 	</div>
 </div><!-- End Modal Review -->
+<?php }
+else{ ?>
+<!-- modal register form -->
+
+<div id="modal-register" class="modal">
+  
+  <form class="modal-content animate"  method="POST" action="php/register.php">
+        
+    <div class="imgcontainerr">
+      <span onclick="document.getElementById('modal-register').style.display='none'" class="close" title="Close">&times;</span>
+      <img src="img/50.png" alt="Avatar" class="avatar">
+      <h1 style="font-family:Poppins;font-style:normal;text-align:center ; color: white;" >Register</h1>
+    </div>
+    
+
+    <div  class="containerr">
+    
+        <input type="text" placeholder="Enter name" name="name" id="t1">
+        <input type="text" placeholder="Enter lastname" name="lastname" id="t1">
+      <input type="text" placeholder="Enter Email" name="email" id="t1">
+      <input type="text" placeholder="Enter User name" name="username" id="t1">
+      <input type="password" placeholder="Enter Password" name="password" id="t1">
+      <input type="password" placeholder="Repeat your Password" name="password" id="t1">        
+      <input type="submit" id="b1" value="register"> 
+  
+      
+    </div>
+    
+  </form>
+  
+</div>
+
+<script>
+// If user clicks anywhere outside of the modal, Modal will close
+
+var modale = document.getElementById('modal-register');
+window.onclick = function(event) {
+    if (event.target == modale) {
+        modale.style.display = "none";
+    }
+}
+</script>
+
+
+<!-- modal login form -->
+<div id="modal-wrapper" class="modal">
+  
+  <form class="modal-content animate"  method="POST" action="php/login.php">
+        
+    <div class="imgcontainerr">
+      <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close ">&times;</span>
+      <img src="img/50.png" alt="Avatar" class="avatar">
+      <h1 style="text-align:center ; color: white;" >Sign In</h1>
+    </div>
+
+    <div class="containerr">
+      <input type="text" placeholder="Enter Email" name="email" id="t1">
+      <input type="password" placeholder="Enter Password" name="password" id="t1">        
+      <input type="submit"  value="login" id="b1">
+      <input type="checkbox" name="remember" style="margin:26px 30px;"> <label style="color: white;">Remember me </label> 
+      <a href="forgot.php" style="color: white; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+    </div>
+    
+  </form>
+  
+</div>
+
+<script>
+// If user clicks anywhere outside of the modal, Modal will close
+
+var modal = document.getElementById('modal-register');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+<script>
+// If user clicks anywhere outside of the modal, Modal will close
+
+var modal = document.getElementById('modal-wrapper');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+<?php } ?>  
+
+
 
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-1.11.2.min.js"></script>

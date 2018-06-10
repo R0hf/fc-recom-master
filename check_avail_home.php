@@ -1,7 +1,15 @@
        <?php
-                    include_once("connect/connection.php");
-                    $r= mysqli_query($connect, "select * from client ");
+            session_start();
+            include_once("/connect/connection.php");
+                if (isset($_SESSION['email'])){
+                   $email = $_SESSION['email'] ;
+                                 
+                   $r= mysqli_query($connect, "SELECT * FROM client WHERE email = '$email' ");
                     $l=mysqli_fetch_assoc($r);
+                    $clientID = $l['clientID'] ;
+                  $sql2 = mysqli_query($connect, "SELECT * FROM review WHERE clientID = '$clientID' ");
+                  
+                  }
        
         if($_GET){
         
@@ -52,6 +60,8 @@
     <!-- SPECIFIC CSS -->
     <link rel="stylesheet" type="text/css" href="css/DateTimePicker.css">
     <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
+
+ 
 
     <!-- modal login form css -->
     <link rel="stylesheet" type="text/css" href="css/modal.css">
@@ -114,7 +124,8 @@
     <div class="container">
         <div class="row">
             <div class="col--md-3 col-sm-3 col-xs-3">
-                <a href="indexP.php" id="logo">
+                <a href="<?php if(isset($_SESSION['email'])){ echo "indexP.php"; }
+                        else{ echo "index.php" ; } ?>" id="logo">
                 <img src="img/logoN.png" width="190" height="23" alt="" data-retina="true">
                 </a>
             </div>
@@ -157,13 +168,19 @@
                     </ul>
                     </li>
                     <li><a href="contacts.html">Contacts</a></li>
+                    <?php if (isset($_SESSION['email'])){ ?>
                     <li class="submenu" id="profil">
                     <a href="javascript:void(0);" class="show-submenu"><?php echo $l['username']; ?> <img src="<?php echo $l['img']; ?>"></a>
                     <ul>
                         <li><a href="my/lite/index.php">My Profile</a> </li>
                         <li><a href="php/logout.php">Log Out</a></li>
                     </ul>  
-                    </li>  
+                    </li>
+                    <?php }else{ ?>
+                      <button onclick="document.getElementById('modal-wrapper').style.display='block'" class="btn_1" >Sign in</button>
+                    <button onclick="document.getElementById('modal-register').style.display='block'" class="btn_1" >Register</button>
+                    <?php } ?>
+                      
                 </ul>
             </div><!-- End main-menu -->
             
@@ -350,24 +367,38 @@
                                   <a href="hotel_detail.php ?id=<?php echo $row['hotelID']?>" class="btn_1_outline">Read more</a>
                                 </div>
                                 <div>
-                                  <span><i class="icon-heart-empty" id="favorite" style="font-size: 30px;color: #ed5434;cursor: pointer;" onclick="trans();" title="Add to favorite "></i></span>
-                                </div>  
+                                  <?php if(isset($_SESSION['email'])){ ?>
+                                  <span><i class="icon-heart-empty" id="<?php echo $row['hotelID']?>" style="font-size: 30px;color: #ed5434;cursor: pointer;" onclick="trans(this)" title="Add to favourite "></i></span>
+                                  <?php } ?>
+                                </div>                             
                               </div>
                           </div><!-- End room_desc_home -->
                       </div>
                   </div><!-- End row -->
               </div><!-- End container -->
           </div><!-- End container_styled_1 -->
+            
           <?php } ?>
       </div>
     </div>
     <script >
-      function trans(){
-        gelb = document.getElementById('favorite') 
-        if (gelb.className == "icon-heart") { gelb.className = "icon-heart-empty"  }
-        else { gelb.className = "icon-heart"  }
-      }
+        function trans(x){
+                var hotelid =  x.id;
+                var cleintid = 26;
+            if (x.className == "icon-heart-empty") {
+                x.className = "icon-heart" ;
+                x.title = "Remove from favourite" ;                      
+                $.post('php/addFav.php', {variable: hotelid ,alv : cleintid});
+              
+            }
+            else { 
+                x.className = "icon-heart-empty"  ;
+                x.title = "Add to favourite" ;
+                $.post('php/deleteFav.php', {variable: hotelid ,alv : cleintid });
+                 }
+        }
     </script>
+     
     <section class="promo_full"><div class="promo_full_wp">
         <div>
             <h3>What Clients say<span>Id tale utinam ius, an mei omnium recusabo iracundia.</span></h3>
@@ -517,6 +548,91 @@
 
 <div id="toTop"></div><!-- Back to top button -->
 
+<!-- modal register form -->
+
+<div id="modal-register" class="modal">
+  
+  <form class="modal-content animate"  method="POST" action="php/register.php">
+        
+    <div class="imgcontainerr">
+      <span onclick="document.getElementById('modal-register').style.display='none'" class="close" title="Close">&times;</span>
+      <img src="img/50.png" alt="Avatar" class="avatar">
+      <h1 style="font-family:Poppins;font-style:normal;text-align:center ; color: white;" >Register</h1>
+    </div>
+    
+
+    <div  class="containerr">
+    
+        <input type="text" placeholder="Enter name" name="name" id="t1">
+        <input type="text" placeholder="Enter lastname" name="lastname" id="t1">
+      <input type="text" placeholder="Enter Email" name="email" id="t1">
+      <input type="text" placeholder="Enter User name" name="username" id="t1">
+      <input type="password" placeholder="Enter Password" name="password" id="t1">
+      <input type="password" placeholder="Repeat your Password" name="password" id="t1">        
+      <input type="submit" id="b1" value="register"> 
+  
+      
+    </div>
+    
+  </form>
+  
+</div>
+
+<script>
+// If user clicks anywhere outside of the modal, Modal will close
+
+var modale = document.getElementById('modal-register');
+window.onclick = function(event) {
+    if (event.target == modale) {
+        modale.style.display = "none";
+    }
+}
+</script>
+
+
+<!-- modal login form -->
+<div id="modal-wrapper" class="modal">
+  
+  <form class="modal-content animate"  method="POST" action="php/login.php">
+        
+    <div class="imgcontainerr">
+      <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close ">&times;</span>
+      <img src="img/50.png" alt="Avatar" class="avatar">
+      <h1 style="text-align:center ; color: white;" >Sign In</h1>
+    </div>
+
+    <div class="containerr">
+      <input type="text" placeholder="Enter Email" name="email" id="t1">
+      <input type="password" placeholder="Enter Password" name="password" id="t1">        
+      <input type="submit"  value="login" id="b1">
+      <input type="checkbox" name="remember" style="margin:26px 30px;"> <label style="color: white;">Remember me </label> 
+      <a href="forgot.php" style="color: white; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+    </div>
+    
+  </form>
+  
+</div>
+
+<script>
+// If user clicks anywhere outside of the modal, Modal will close
+
+var modal = document.getElementById('modal-register');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+<script>
+// If user clicks anywhere outside of the modal, Modal will close
+
+var modal = document.getElementById('modal-wrapper');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
         
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-1.11.2.min.js"></script>

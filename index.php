@@ -58,11 +58,7 @@
             </div>
             <nav class="col--md-9 col-sm-9 col-xs-9">
             <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
-            <ul id="lang_top">
-                    <li><a href="#" class="active">EN</a></li>
-                    <li><a href="#" class="active">FR</a></li>
-                    <li><a href="#" class="active">AR</a></li>
-            </ul>
+            
 
             <div class="main-menu">
                 <div id="header_menu">
@@ -587,7 +583,7 @@ window.onclick = function(event) {
 <!-- modal login form -->
 <div id="modal-wrapper" class="modal">
   
-  <form class="modal-content animate"  method="POST" action="php/sign.php">
+  <form class="modal-content animate"  method="POST" action="php/login.php">
         
     <div class="imgcontainerr">
       <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close ">&times;</span>

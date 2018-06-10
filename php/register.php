@@ -9,8 +9,8 @@
     $username=$_POST["username"];
     $pass=$_POST["password"];
     // $epass = hash("sha512",$pass).md5("test");
-    $ra=mysqli_query($connect,"INSERT INTO client(id,name,lastname,email,username,password,img) VALUES(NULL,'$name','$lastname','$email','$username','$pass','')");
-    echo "22";
+    $ra=mysqli_query($connect,"INSERT INTO client (clientID ,name , lastname , email , username , password , img ) VALUES(NULL,'$name','$lastname','$email','$username','$pass','')");
+    
     header("location:../my/lite/index.html");
     }   	
 ?>

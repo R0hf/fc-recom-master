@@ -1,22 +1,19 @@
        <?php
-                    include_once("/connect/connection.php");
-                    mysqli_query($connect,"UPDATE  viewcounter set views=views+1 where id='1' ");
-                    $r= mysqli_query($connect, "select * from client ");
-                    $l=mysqli_fetch_assoc($r);
-                    ?>
+            session_start();
+           
+           if (isset($_SESSION['email'])){
+                $email = $_SESSION['email'] ;
+             include_once("/connect/connection.php");
+             mysqli_query($connect,"UPDATE  viewcounter set views=views+1 where id='1' ");
+        $r= mysqli_query($connect, "SELECT * FROM client WHERE email = '$email' ");
+             $l=mysqli_fetch_assoc($r);
+                      
+            ?>
         <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
 <html>
 <head>
-    <style type="text/css">
-    .rech{
-        font-size: 15px;
-        background-color: rgba(0,0,0,0.7);  
-        width: 39% ;
-        margin-left: 95px;
-        padding-left: 30px;
-            }
-    </style>
+    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -602,3 +599,8 @@
 <script type="text/javascript">$("#dtBox").DateTimePicker();</script>
 </body>
 </html>
+<?php }
+ else{
+    echo "you are not connected ";
+ }
+ ?>
