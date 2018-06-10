@@ -7,8 +7,10 @@
                    $r= mysqli_query($connect, "SELECT * FROM client WHERE email = '$email' ");
                     $l=mysqli_fetch_assoc($r);
                     $clientID = $l['clientID'] ;
-                  $sql2 = mysqli_query($connect, "SELECT * FROM review WHERE clientID = '$clientID' ");
-                  
+                  $sql2 = mysqli_query($connect, "SELECT * FROM favourite WHERE clientID = '$clientID' ");
+                    while ( $mk = mysqli_fetch_row($sql2)){
+                      
+                    }
                   }
        
         if($_GET){
@@ -340,7 +342,7 @@
                                 </div>
                                 <div>
                                   <?php if(isset($_SESSION['email'])){ ?>
-                                  <span><i class="icon-heart-empty" id="<?php echo $row['hotelID']?>" style="font-size: 30px;color: #ed5434;cursor: pointer;" onclick="trans(this)" title="Add to favourite "></i></span>
+                                  <span><i class="icon-heart-empty" id="<?php echo $row['hotelID']?>" style="font-size: 30px;color: #ed5434;cursor: pointer;" onclick="trans(this)" title="<?php echo $clientID ?>" ></i></span>
                                   <?php } ?>
                                 </div>                             
                               </div>
@@ -356,16 +358,16 @@
     <script >
         function trans(x){
                 var hotelid =  x.id;
-                var cleintid = 26;
+                var cleintid = x.title;
             if (x.className == "icon-heart-empty") {
                 x.className = "icon-heart" ;
-                x.title = "Remove from favourite" ;                      
+                //x.title = "Remove from favourite" ;                      
                 $.post('php/addFav.php', {variable: hotelid ,alv : cleintid});
               
             }
             else { 
                 x.className = "icon-heart-empty"  ;
-                x.title = "Add to favourite" ;
+                //x.title = "Add to favourite" ;
                 $.post('php/deleteFav.php', {variable: hotelid ,alv : cleintid });
                  }
         }
