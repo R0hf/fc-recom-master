@@ -1,13 +1,13 @@
        <?php
-            session_start();
-           
-           if (isset($_SESSION['email'])){
-                $email = $_SESSION['email'] ;
              include_once("/connect/connection.php");
-             mysqli_query($connect,"UPDATE  viewcounter set views=views+1 where id='1' ");
-        $r= mysqli_query($connect, "SELECT * FROM client WHERE email = '$email' ");
+            session_start();
+           if(isset($_SESSION['email'])){
+                   $email = $_SESSION['email'] ;
+             
+            $r= mysqli_query($connect, "SELECT * FROM client WHERE email = '$email' ");
              $l=mysqli_fetch_assoc($r);
-                      
+               }    
+               mysqli_query($connect,"UPDATE  viewcounter set views=views+1 where id='1' ");   
             ?>
         <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
@@ -61,7 +61,7 @@
     
      <!-- Header ================================================== -->
     <header>
-    <div class="container">
+     <div class="container">
         <div class="row">
             <div class="col--md-3 col-sm-3 col-xs-3">
                 <a href="indexP.php" id="logo">
@@ -78,35 +78,10 @@
                 <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                  <ul>
                     <li class="submenu">
-                    <a href="javascript:void(0);" class="show-submenu">Home<i class="icon-down-open-mini"></i></a>
-                    <ul>
-                        <li><a href="index.html">Home Booking</a></li>
-                        <li><a href="index_5.html">Home Booking date 2</a></li>
-                        <li><a href="index_4.html">Home Carousel</a></li>
-                        <li><a href="index_2.html">Home Layer Slider</a></li>
-                        <li><a href="index_6.html">Home Video bg</a></li>
-                        <li><a href="index_3.html">Home Text Rotator</a></li>
-                    </ul>
+                    <a href="javascript:void(0);" class="show-submenu">Home<i class="icon-home"></i></a>
                     </li>
-                    <li><a href="room_list.html">Rooms</a></li>
-                    <li class="submenu">
-                    <a href="javascript:void(0);" class="show-submenu">Pages<i class="icon-down-open-mini"></i></a>
-                    <ul>
-                    	<li><a href="header_2/index.html">Header transparent</a></li>
-                    	<li><a href="room_detail.html">Room detail</a></li>
-                        <li><a href="room_detail_2.html">Room detail date 2</a></li>
-                        <li><a href="about.html">About us</a></li>
-                        <li><a href="faq.html">Faq</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="coming_soon/index.html">Site launch/Coming soon</a></li>
-                        <li><a href="shortcodes.html">Shortcodes</a></li>
-                        <li><a href="icon_pack_1.html">Icon pack 1</a></li>
-                         <li><a href="icon_pack_2.html">Icon pack 2</a></li>
-                        <li><a href="icon_pack_3.html">Icon pack 3</a></li>
-                    </ul>
-                    </li>
-                    <li><a href="contacts.html">Contacts</a></li>
+                    <li><a href="contacts.php">Contacts<i class="icon-mail-alt"></i></a></li>
+                    <?php if (isset($_SESSION['email'])){ ?>
                     <li class="submenu" id="profil">
                     <a href="javascript:void(0);" class="show-submenu"><?php echo $l['username']; ?> <img src="<?php echo $l['img']; ?>"></a>
                     <ul>
@@ -114,12 +89,16 @@
                         <li><a href="php/logout.php">Log Out</a></li>
                     </ul>  
                     </li>  
+                    <?php  } else{?>
+                    <button onclick="document.getElementById('modal-wrapper').style.display='block'" class="btn_1" >Sign in</button>
+                    <button onclick="document.getElementById('modal-register').style.display='block'" class="btn_1" >Register</button>
+                    <?php } ?>
                 </ul>
             </div><!-- End main-menu -->
             
             </nav>
         </div><!-- End row -->
-    </div><!-- End container -->
+     </div><!-- End container -->
     </header>
     <!-- End Header =============================================== -->
     
@@ -587,6 +566,81 @@
     </footer><!-- End footer -->
 
 <div id="toTop"></div><!-- Back to top button -->
+<div id="modal-register" class="modal">
+  
+  <form class="modal-content animate"  method="POST" action="php/register.php">
+        
+    <div class="imgcontainerr">
+      <span onclick="document.getElementById('modal-register').style.display='none'" class="close" title="Close">&times;</span>
+      <img src="img/50.png" alt="Avatar" class="avatar">
+      <h1 style="font-family:Poppins;font-style:normal;text-align:center ; color: white;" >Register</h1>
+    </div>
+    
+
+    <div  class="containerr">
+    
+        <input type="text" placeholder="Enter name" name="name" id="t1">
+        <input type="text" placeholder="Enter lastname" name="lastname" id="t1">
+      <input type="text" placeholder="Enter Email" name="email" id="t1">
+      <input type="text" placeholder="Enter User name" name="username" id="t1">
+      <input type="password" placeholder="Enter Password" name="password" id="t1">
+      <input type="password" placeholder="Repeat your Password" name="password" id="t1">        
+      <input type="submit" id="b1" value="register"> 
+  
+      
+    </div>
+    
+  </form>
+  
+</div>
+// <script>
+//     // If user clicks anywhere outside of the modal, Modal will close
+
+//     var modale = document.getElementById('modal-register');
+//     window.onclick = function(event) {
+//         if (event.target == modale) {
+//             modale.style.display = "none";
+//         }
+//     }
+// </script>
+
+
+<!-- modal login form -->
+<div id="modal-wrapper" class="modal">
+  
+  <form class="modal-content animate"  method="POST" action="php/login.php">
+        
+    <div class="imgcontainerr">
+      <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close ">&times;</span>
+      <img src="img/50.png" alt="Avatar" class="avatar">
+      <h1 style="text-align:center ; color: white;" >Sign In</h1>
+    </div>
+
+    <div class="containerr">
+      <input type="text" placeholder="Enter Email" name="email" id="t1">
+      <input type="password" placeholder="Enter Password" name="password" id="t1">        
+      <input type="submit"  value="login" id="b1">
+      <input type="checkbox" name="remember" style="margin:26px 30px;"> <label style="color: white;">Remember me </label> 
+      <a href="forgot.php" style="color: white; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+    </div>
+    
+  </form>
+  
+</div>
+
+<script>
+    // If user clicks anywhere outside of the modal, Modal will close
+
+    var m = document.getElementById('modal-register');
+    var modal = document.getElementById('modal-wrapper');
+    window.onclick = function(event) {
+        if ((event.target == m) ||(event.target==modal)) {
+            m.style.display = "none";
+            modal.style.display="none";
+        }
+    }
+</script>
+
 
         
 <!-- COMMON SCRIPTS -->
@@ -599,8 +653,3 @@
 <script type="text/javascript">$("#dtBox").DateTimePicker();</script>
 </body>
 </html>
-<?php }
- else{
-    echo "you are not connected ";
- }
- ?>

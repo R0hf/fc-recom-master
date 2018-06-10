@@ -3,5 +3,5 @@
   $_SESSION['email'] = "";
   $_SESSION['pass'] = "";
   session_destroy();
-header('Location:../index.php');
+header('Location:../indexP.php');
  ?>

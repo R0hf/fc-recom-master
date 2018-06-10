@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<?php
+session_start();
+            include_once("/connect/connection.php");
+            if (isset($_SESSION['email'])){
+                   $email = $_SESSION['email'] ;
+                                 
+                   $r= mysqli_query($connect, "SELECT * FROM client WHERE email = '$email' ");
+                    $c=mysqli_fetch_assoc($r);
+                  }
+?>
 <html>
 <head>
     <meta charset="utf-8">
@@ -19,6 +29,7 @@
 
     <!-- BASE CSS -->
     <link href="css/base.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php  if(!isset($_SESSION['email'])){echo"css/modal.css";}?>">
 
     <!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
@@ -42,20 +53,16 @@
     
      <!-- Header ================================================== -->
     <header>
-    <div class="container">
+     <div class="container">
         <div class="row">
             <div class="col--md-3 col-sm-3 col-xs-3">
-                <a href="index.html" id="logo">
+                <a href="indexP.php" id="logo">
                 <img src="img/logoN.png" width="190" height="23" alt="" data-retina="true">
                 </a>
             </div>
             <nav class="col--md-9 col-sm-9 col-xs-9">
             <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
-            <ul id="lang_top">
-                <li><a href="#" class="active">EN</a></li>
-                <li><a href="#">FR</a></li>
-                <li><a href="#">ES</a></li>
-            </ul>
+            
             <div class="main-menu">
                 <div id="header_menu">
                      <img src="img/logo_m.png" width="141" height="40" alt="" data-retina="true">
@@ -63,41 +70,27 @@
                 <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                  <ul>
                     <li class="submenu">
-                    <a href="javascript:void(0);" class="show-submenu">Home<i class="icon-down-open-mini"></i></a>
-                    <ul>
-                        <li><a href="index.html">Home Booking</a></li>
-                        <li><a href="index_5.html">Home Booking date 2</a></li>
-                        <li><a href="index_4.html">Home Carousel</a></li>
-                        <li><a href="index_2.html">Home Layer Slider</a></li>
-                        <li><a href="index_6.html">Home Video bg</a></li>
-                        <li><a href="index_3.html">Home Text Rotator</a></li>
-                    </ul>
+                    <a href="indexP.php">Home<i class="icon-home"></i></a>
                     </li>
-                    <li><a href="room_list.html">Rooms</a></li>
-                    <li class="submenu">
-                    <a href="javascript:void(0);" class="show-submenu">Pages<i class="icon-down-open-mini"></i></a>
+                    <li><a href="contacts.php">Contacts<i class="icon-mail-alt"></i></a></li>
+                    <?php if (isset($_SESSION['email'])){ ?>
+                    <li class="submenu" id="profil">
+                    <a href="javascript:void(0);" class="show-submenu"><?php echo $c['username']; ?> <img src="<?php echo $c['img']; ?>"></a>
                     <ul>
-                    	<li><a href="header_2/index.html">Header transparent</a></li>
-                    	<li><a href="room_detail.html">Room detail</a></li>
-                        <li><a href="room_detail_2.html">Room detail date 2</a></li>
-                        <li><a href="about.html">About us</a></li>
-                        <li><a href="faq.html">Faq</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="coming_soon/index.html">Site launch/Coming soon</a></li>
-                        <li><a href="shortcodes.html">Shortcodes</a></li>
-                        <li><a href="icon_pack_1.html">Icon pack 1</a></li>
-                         <li><a href="icon_pack_2.html">Icon pack 2</a></li>
-                        <li><a href="icon_pack_3.html">Icon pack 3</a></li>
-                    </ul>
-                    </li>
-                    <li><a href="contacts.html">Contacts</a></li>
+                        <li><a href="my/lite/index.php">My Profile</a> </li>
+                        <li><a href="php/logout.php">Log Out</a></li>
+                    </ul>  
+                    </li>  
+                    <?php  } else{?>
+                    <button onclick="document.getElementById('modal-wrapper').style.display='block'" class="btn_1" >Sign in</button>
+                    <button onclick="document.getElementById('modal-register').style.display='block'" class="btn_1" >Register</button>
+                    <?php } ?>
                 </ul>
             </div><!-- End main-menu -->
             
             </nav>
         </div><!-- End row -->
-    </div><!-- End container -->
+     </div><!-- End container -->
     </header>
     <!-- End Header =============================================== -->
     
@@ -180,10 +173,7 @@
 					</div>
 					<div class="row add_bottom_30">
 						<div class="col-md-6">
-                        	<div class="form-group">
-                                <label>Human verification</label>
-                                <input type="text" id="verify_contact" class="form-control add_bottom_30" placeholder="Are you human? 3 + 1 =">
-                            </div>
+                        	
 							<input type="submit" value="Submit" class="btn_1" id="submit-contact">
 						</div>
 					</div>
@@ -247,7 +237,7 @@
                             <li><a href="#"><i class="icon-vimeo"></i></a></li>
                             <li><a href="#"><i class="icon-youtube-play"></i></a></li>
                         </ul>
-                          <p>Copyright © 2016 <a target="_blank" title="Free CSS Themes" href="http://freecssthemes.com/">FreeCSSThemes</a>  |  All Right Reserved</p>
+                          <p>Copyright © 2018 <a target="_blank" title="Free CSS Themes" href="http://freecssthemes.com/">FreeCSSThemes</a>  |  All Right Reserved</p>
 
                     </div>
                 </div>
@@ -256,6 +246,69 @@
     </footer><!-- End footer -->
 
 <div id="toTop"></div><!-- Back to top button -->
+<div id="modal-register" class="modal">
+  
+  <form class="modal-content animate"  method="POST" action="php/register.php">
+        
+    <div class="imgcontainerr">
+      <span onclick="document.getElementById('modal-register').style.display='none'" class="close" title="Close">&times;</span>
+      <img src="img/50.png" alt="Avatar" class="avatar">
+      <h1 style="font-family:Poppins;font-style:normal;text-align:center ; color: white;" >Register</h1>
+    </div>
+    
+
+    <div  class="containerr">
+    
+        <input type="text" placeholder="Enter name" name="name" id="t1">
+        <input type="text" placeholder="Enter lastname" name="lastname" id="t1">
+      <input type="text" placeholder="Enter Email" name="email" id="t1">
+      <input type="text" placeholder="Enter User name" name="username" id="t1">
+      <input type="password" placeholder="Enter Password" name="password" id="t1">
+      <input type="password" placeholder="Repeat your Password" name="password" id="t1">        
+      <input type="submit" id="b1" value="register"> 
+  
+      
+    </div>
+    
+  </form>
+  
+</div>
+
+<!-- modal login form -->
+<div id="modal-wrapper" class="modal">
+  
+  <form class="modal-content animate"  method="POST" action="php/login.php">
+        
+    <div class="imgcontainerr">
+      <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close ">&times;</span>
+      <img src="img/50.png" alt="Avatar" class="avatar">
+      <h1 style="text-align:center ; color: white;" >Sign In</h1>
+    </div>
+
+    <div class="containerr">
+      <input type="text" placeholder="Enter Email" name="email" id="t1">
+      <input type="password" placeholder="Enter Password" name="password" id="t1">        
+      <input type="submit"  value="login" id="b1">
+      <input type="checkbox" name="remember" style="margin:26px 30px;"> <label style="color: white;">Remember me </label> 
+      <a href="forgot.php" style="color: white; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+    </div>
+    
+  </form>
+  
+</div>
+
+<script>
+    // If user clicks anywhere outside of the modal, Modal will close
+
+    var m = document.getElementById('modal-register');
+    var modal = document.getElementById('modal-wrapper');
+    window.onclick = function(event) {
+        if ((event.target == m) ||(event.target==modal)) {
+            m.style.display = "none";
+            modal.style.display="none";
+        }
+    }
+</script>
    
 <!-- COMMON SCRIPTS -->
 <script src="js/jquery-1.11.2.min.js"></script>
