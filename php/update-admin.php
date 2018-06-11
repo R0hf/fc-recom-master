@@ -9,7 +9,7 @@ $id = $_GET['id'];
 $username=$_POST['username'];
 $passwordOld=$_POST['password1'];
 $passwordNew=$_POST['password2'];
-		$sql = "UPDATE admin  set username='$username',password='$passwordNew' where (id='$id' & $password.id=$passwordOld) ";	
+		$sql = "UPDATE admin  set username='$username',password='$passwordNew' where (id='$id' & password='$passwordOld') ";	
 		$r=mysqli_query($connect, $sql);
 		
 			header("location:../admin/pages/forms.php");

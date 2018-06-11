@@ -208,14 +208,14 @@
                                         <tbody>
                                 <?php  
                                  include_once('../../connect/connection.php');
-                                $resultat = mysqli_query($connect,"SELECT * FROM booking");
+                                $resultat = mysqli_query($connect,"SELECT * FROM reservation ");
                                  $i=1 ;
                               while ($row = mysqli_fetch_assoc($resultat)){ ?>
                                             <tr>
-                                                <td><?php echo$row['id_booking']?></td>
-                                                <td><?php echo$row['id_room']?></td>
-                                                <td><?php echo$row['check_in']?></td>
-                                                <td><?php echo$row['check_out']?></td>
+                                                <td><?php echo$row['reservationID']?></td>
+                                                <td><?php echo$row['roomID']?></td>
+                                                <td><?php echo$row['check__in']?></td>
+                                                <td><?php echo$row['check__out']?></td>
                                             </tr>
                                             
                                           </tbody>
@@ -257,7 +257,7 @@
                                 $resultat = mysqli_query($connect,"SELECT * FROM client ");
                                   while ($row = mysqli_fetch_assoc($resultat)){ ?>
                                             <tr class="success">
-                                                <td ><?php echo $row['id'];?></td>
+                                                <td ><?php echo $row['clientID'];?></td>
                                                 <td ><?php echo $row['name'];?></td>
                                                 <td><?php echo $row['lastname'];?></td>
                                                 <td ><?php echo $row['email'];?></td>

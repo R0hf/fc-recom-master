@@ -56,6 +56,8 @@
             $countClient=mysqli_num_rows($sql2);
             $sql3=mysqli_query($connect,"SELECT * from admin ");
             $countAdmin=mysqli_num_rows($sql3);
+            $sql4=mysqli_query($connect,"SELECT * from Reservation ");
+            $countBook=mysqli_num_rows($sql4);
 
         ?>
 <link href="../css/profil.css" rel="stylesheet"> 
@@ -191,7 +193,7 @@
                             </div>
                             <a href="#">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left"><a href="tables.php">View Details</a></span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
                                     <div class="clearfix"></div>
@@ -214,7 +216,7 @@
                             </div>
                             <a href="#">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left"><a href="tables.php">View Details</a></span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
                                     <div class="clearfix"></div>
@@ -237,7 +239,7 @@
                             </div>
                             <a href="#">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left"><a href="tables.php">View Details</a></span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
                                     <div class="clearfix"></div>
@@ -253,14 +255,14 @@
                                         <i class="fa fa-support fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">13</div>
-                                        <div>Support Tickets!</div>
+                                        <div class="huge"><?php echo $countBook;?></div>
+                                        <div>Reservations </div>
                                     </div>
                                 </div>
                             </div>
                             <a href="#">
                                 <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-left"><a href="tables.php">View Details</a></span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
                                     <div class="clearfix"></div>
