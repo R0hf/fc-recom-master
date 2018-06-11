@@ -584,7 +584,6 @@
       <input type="text" placeholder="Enter Email" name="email" id="t1">
       <input type="text" placeholder="Enter User name" name="username" id="t1">
       <input type="password" placeholder="Enter Password" name="password" id="t1">
-      <input type="password" placeholder="Repeat your Password" name="password" id="t1">        
       <input type="submit" id="b1" value="register"> 
   
       

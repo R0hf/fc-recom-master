@@ -1,13 +1,16 @@
 <?php
 session_start();
- if(!isset($_SESSION['email'])){
+// echo $_SESSION['email'];
+ if(!$_SESSION['email']){
     header("location:../../indexP.php");
-}else{
+}?>
+<?php
 $email = $_SESSION['email'] ;
 include_once("../../connect/connection.php");
                     $r= mysqli_query($connect, "SELECT * from client WHERE email ='$email' ");
                     $l=mysqli_fetch_assoc($r);
- ?>
+ 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -229,4 +232,3 @@ include_once("../../connect/connection.php");
 </body>
 
 </html>
-<?php }?>
