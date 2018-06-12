@@ -81,9 +81,11 @@
                     <a href="javascript:void(0);" class="show-submenu">Home<i class="icon-home"></i></a>
                     </li>
                     <li><a href="contacts.php">Contacts<i class="icon-mail-alt"></i></a></li>
+                    
                     <?php if (isset($_SESSION['email'])){ ?>
+                        <li> |</li>
                     <li class="submenu" id="profil">
-                    <a href="javascript:void(0);" class="show-submenu"><?php echo $l['username']; ?> <img width="40px" src="my/lite/<?php echo $l['img'];?>"></a>
+                    <a href="javascript:void(0);" class="show-submenu"><?php echo $l['username']; ?> <img width="30px" height="30px" style="border-radius: 50%" src="my/lite/<?php echo $l['img'];?>"></a>
                     <ul>
                         <li><a href="my/lite/index.php">My Profile</a> </li>
                         <li><a href="php/logout.php">Log Out</a></li>
@@ -103,7 +105,7 @@
     <!-- End Header =============================================== -->
     
 	<!-- SubHeader =============================================== -->
-    <div class="parallax-window" id="booking" data-parallax="scroll" data-image-src="img/sub_header_home.jpg" data-natural-width="1400" data-natural-height="550">
+    <div class="parallax-window" id="booking" data-parallax="scroll" data-image-src="img/1.jpg" data-natural-width="1400" data-natural-height="550">
         <div id="subheader_home">
             <div id="sub_content">
                 <div id="book_container">

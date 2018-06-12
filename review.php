@@ -9,12 +9,15 @@
      $price = (float)$_POST['price_review'] ;
      $quality = (float)$_POST['quality_review'] ;
      $comfort = (float)$_POST['comfort_review'] ;
+     $comment = $_POST['review_text'] ;
+     $date = date('m-d-Y', time());
+
      $id = (float)$_POST['verify_review'] ;
      $clientID = $l['clientID'] ;
 
      $rate = ( $position + $price + $quality + $comfort )/2 ;
 
-     $sql = " INSERT INTO review (reviewID, hotelID, clientID, rPosition, rComfort, rPrice, rQuality, rate) VALUES (NULL,'$id','$clientID','$position','$comfort','$price','$quality','$rate') " ;
+     $sql = " INSERT INTO review (reviewID, hotelID, clientID, rPosition, rComfort, rPrice, rQuality, rate , comment , date_r) VALUES (NULL,'$id','$clientID','$position','$comfort','$price','$quality','$rate','$comment','$date') " ;
      $res=mysqli_query($connect,$sql );
 
      $k = mysqli_query($connect, "SELECT * FROM review WHERE (`hotelID` = '$id') ");
@@ -29,7 +32,7 @@
      $sql2 = "UPDATE `hotel` SET `rate` = '$final' WHERE `hotel`.`hotelID` = '$id'";
      $res2 = mysqli_query($connect,$sql2 );
      
-
+     
     
     
 

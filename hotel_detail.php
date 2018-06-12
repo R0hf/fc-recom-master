@@ -10,27 +10,27 @@
 
             
             $id = $_GET['id'] ;
-            $sql2 = mysqli_query($connect, "select * from room where `hotelID` =".$id );
+            $sql2 = mysqli_query($connect, "SELECT * from room where `hotelID` =".$id );
             $r = mysqli_fetch_assoc($sql2);
-            $sql3 = mysqli_query($connect, "select * from hotel where `hotelID` =".$id );
+            $sql3 = mysqli_query($connect, "SELECT * from hotel where `hotelID` =".$id );
             $h = mysqli_fetch_assoc($sql3);
 
-            $sql4 = mysqli_query($connect, "select * from review where `hotelID` =".$id );
+            $sql4 = mysqli_query($connect, "SELECT * from review where `hotelID` =".$id );
             $count = mysqli_num_rows($sql4);
 
             
             if( $count != 0 ){
                 $price = 0 ; $quality = 0 ; $comfort = 0 ; $position = 0 ;
-            while ($row = mysqli_fetch_assoc($sql4)) {
-                $price = $price + $row['rPrice'] ;
-                $quality = $quality + $row['rQuality'] ;
-                $comfort = $comfort + $row['rComfort'] ;
-                $position = $position + $row['rPosition'] ;
-            }
-            $Tprice = $price / $count ;
-            $Tcomfort = $comfort / $count ;
-            $Tposition = $position / $count ;
-            $Tquality = $quality / $count ;
+                while ($row = mysqli_fetch_assoc($sql4)) {
+                    $price = $price + $row['rPrice'] ;
+                    $quality = $quality + $row['rQuality'] ;
+                    $comfort = $comfort + $row['rComfort'] ;
+                    $position = $position + $row['rPosition'] ;
+                }
+                $Tprice = $price / $count ;
+                $Tcomfort = $comfort / $count ;
+                $Tposition = $position / $count ;
+                $Tquality = $quality / $count ;
             }  
     ?>
 
@@ -103,9 +103,11 @@
                     <a href="indexP.php">Home<i class="icon-home"></i></a>
                     </li>
                     <li><a href="contacts.php">Contacts<i class="icon-mail-alt"></i></a></li>
+                    
                     <?php if (isset($_SESSION['email'])){ ?>
+                        <li> |</li>
                     <li class="submenu" id="profil">
-                    <a href="javascript:void(0);" class="show-submenu"><?php echo $c['username']; ?> <img width="40px" src="my/lite/<?php echo $c['img'];?>"></a>
+                    <a href="javascript:void(0);" class="show-submenu"><?php echo $c['username']; ?> <img width="30px" height="30px" src="my/lite/<?php echo $c['img'];?>" style="border-radius: 50%"></a>
                     <ul>
                         <li><a href="my/lite/index.php">My Profile</a> </li>
                         <li><a href="php/logout.php">Log Out</a></li>
@@ -129,8 +131,7 @@
       <div><img src="<?php echo $h['imgg']; ?>" alt=""><div class="caption"><h3>Fantastic bed room</h3></div></div>
       <div><img src="<?php echo $h['imgg2']; ?>" alt=""><div class="caption"><h3>Equiped bathroom</h3></div></div>
       <div><img src="<?php echo $h['imgg3']; ?>" alt=""><div class="caption"><h3>Equiped bathroom</h3></div></div>
-      <div><img src="img/room_detail_4.jpg" alt=""><div class="caption"><h3>Nice outdoor</h3></div></div>
-      <div><img src="img/room_detail_5.jpg" alt=""><div class="caption"><h3>Swimming pool</h3></div></div>
+      
     </div>
     
     
@@ -306,7 +307,7 @@
                             </ul>
                         </div>
                     </div><!-- End row -->
-                    
+                    bb
                     <hr>
                     <div class="review_strip_single">
                         <img src="img/avatar1.jpg" alt="" class="img-circle">
@@ -435,7 +436,7 @@
                              </div>
                         </form>
                         <hr>
-                        <a href="#0" class="btn_outline"> or Contact us</a>
+                        <a href="contacts.php" class="btn_outline"> or Contact us</a>
                         <a href="tel://00213773347971" id="phone_2"><i class="icon_set_1_icon-91"></i>+213 773 34 79 71</a>
                      
                 </div><!-- End box_style -->
