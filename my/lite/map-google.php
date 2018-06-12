@@ -55,7 +55,7 @@ session_start();
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="indexP.php">
+                    <a class="navbar-brand" href="../../indexP.php">
                         <span>
                         <img src="../../img/logoN.png" width="175" height="35" alt="" data-retina="true">
                         </span>
@@ -79,11 +79,7 @@ session_start();
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a>
-                            </form>
-                        </li>
+                       
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
@@ -115,6 +111,7 @@ session_start();
                         <li> <a class="waves-effect waves-dark" href="pages-profile.php" aria-expanded="false"><i class="mdi mdi-account-check"></i><span class="hide-menu">Profile</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="table-basic.php" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">Table</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="map-google.php" aria-expanded="false"><i class="mdi mdi-earth"></i><span class="hide-menu">Map</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="../../php/logout.php" aria-expanded="false"><i class="mdi mdi-account-off"></i><span class="hide-menu">Log out</span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
