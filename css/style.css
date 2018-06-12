@@ -401,5 +401,22 @@ hr.more_margin{margin:45px 0}
 	display: grid;
 	grid-template-columns: 85% 15% ;
 }
+.titi-text{
+	width: 50% ;
+	position: relative;
+	margin-top: -17%;
+	margin-left: 20%;
+	background-color: rgba(0,0,0,0.7);
+
+}
+.titi-text h2{
+	text-align: center;
+	color: white ;
+	font-family: Poppins,Arial,sans-serif;
+	font-weight: 500 ;
+	line-height: 1.5 ;
+
+}
+
 
 /* #c94a30 #f48f00  #ed5434  #0b9808  #078de3 */

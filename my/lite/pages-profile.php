@@ -8,6 +8,8 @@ $email = $_SESSION['email'] ;
 include_once("../../connect/connection.php");
                     $r= mysqli_query($connect, "SELECT * from client WHERE email ='$email' ");
                     $l=mysqli_fetch_assoc($r);
+                    $pass = $l['password'] ;
+                    
  ?>
         <!DOCTYPE html>
 <html lang="en">
@@ -80,16 +82,12 @@ include_once("../../connect/connection.php");
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a>
-                            </form>
-                        </li>
+                        
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
                         <li class="nav-item">
-                            <a class="nav-link waves-effect waves-dark" href="#"><img src="<?php echo$l['img'] ?>" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link waves-effect waves-dark" href="#"><img width="30px" height="30px" src="<?php echo$l['img'] ?>" alt="user" class="profile-pic" /></a>
                         </li>
                     </ul>
                 </div>
@@ -111,6 +109,7 @@ include_once("../../connect/connection.php");
                         <li> <a class="waves-effect waves-dark" href="pages-profile.php" aria-expanded="false"><i class="mdi mdi-account-check"></i><span class="hide-menu">Profile</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="table-basic.php" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">Table</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="map-google.php" aria-expanded="false"><i class="mdi mdi-earth"></i><span class="hide-menu">Map</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="../../php/logout.php" aria-expanded="false"><i class="mdi mdi-account-off"></i><span class="hide-menu">Log out</span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -149,9 +148,9 @@ include_once("../../connect/connection.php");
                     <div class="col-lg-4 col-xlg-3 col-md-5">
                         <div class="card">
                             <div class="card-body">
-                                <center class="m-t-30"> <img src="<?php echo$l['img'] ?>" class="img-circle" width="150" />
-                                    <h4 class="card-title m-t-10"><?php echo$l['email'].' '.$l['lastname']?></h4>
-                                    <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
+                                <center class="m-t-30"> <img width="250px" height="250px" src="<?php echo$l['img'] ?>" class="img-circle"  />
+                                    <h4 class="card-title m-t-10"><?php echo $l['username']?></h4>
+                                    <h6 class="card-subtitle"></h6>
                                     <div class="row text-center justify-content-md-center">
                                         <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium"></font></a></div>
                                         <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium"></font></a></div>
@@ -194,7 +193,8 @@ include_once("../../connect/connection.php");
                                     <div class="form-group">
                                         <label class="col-md-12">Password</label>
                                         <div class="col-md-12">
-                                            <input type="password" name="password" value="<?php echo $l['password']?>" class="form-control form-control-line">
+                                            <input type="password" name="password" value="<?php
+                                             echo $pass ;?>" class="form-control form-control-line">
                                         </div>
                                     </div>
                                      <div class="form-group">

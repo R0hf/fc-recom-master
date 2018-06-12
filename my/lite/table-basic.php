@@ -2,7 +2,12 @@
 session_start();
  if(!isset($_SESSION['email'])){
     header("location:../../indexP.php");
-}else{ ?>
+}else{
+    $email = $_SESSION['email'] ;
+    include_once("../../connect/connection.php");
+                    $r= mysqli_query($connect, "SELECT * from client WHERE email ='$email' ");
+                    $l=mysqli_fetch_assoc($r); 
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,6 +21,7 @@ session_start();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>My profil-member area</title>
+
     <!-- Bootstrap Core CSS -->
     <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -53,7 +59,7 @@ session_start();
                 <!-- Logo -->
                 <!-- ============================================================== -->
                <div class="navbar-header">
-                    <a class="navbar-brand" href="indexP.php">
+                    <a class="navbar-brand" href="../../indexP.php">
                         <span>
                         <img src="../../img/logoN.png" width="175" height="35" alt="" data-retina="true">
                         </span>
@@ -77,21 +83,13 @@ session_start();
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a>
-                            </form>
-                        </li>
+                       
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
-                        <?php
-                    include_once("../../connect/connection.php");
-                    $r= mysqli_query($connect, "select * from client ");
-                    $l=mysqli_fetch_assoc($r);
-                    ?>
+                        
                         <li class="nav-item">
-                            <a class="nav-link waves-effect waves-dark" href="#"><img src="<?php echo$l['img'];?>" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link waves-effect waves-dark" href="#"><img src="<?php echo $l['img'];?>" width="30px" height="30px" alt="user" class="profile-pic" /></a>
                         </li>
                     </ul>
                 </div>
@@ -113,6 +111,7 @@ session_start();
                         <li> <a class="waves-effect waves-dark" href="pages-profile.php" aria-expanded="false"><i class="mdi mdi-account-check"></i><span class="hide-menu">Profile</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="table-basic.php" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">Table</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="map-google.php" aria-expanded="false"><i class="mdi mdi-earth"></i><span class="hide-menu">Map</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="../../php/logout.php" aria-expanded="false"><i class="mdi mdi-account-off"></i><span class="hide-menu">Log out</span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -135,7 +134,7 @@ session_start();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor">My hotels</h3>
+                        <h3 class="text-themecolor">My favourite hotels</h3>
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -149,36 +148,41 @@ session_start();
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">My hotels</h4>
+                                
                                 <!-- <h6 class="card-subtitle">Add class <code>.table</code></h6> -->
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                
+                                                <th>Hotel name</th>
+                                                <th>Location</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php  
-                                             include_once('../../connect/connection.php');
+                                             
                                              $id=$l['clientID'];
-                                            $resultat = mysqli_query($connect,"SELECT hotelID FROM favourite WHERE clientID='$id';");
-                                            
+                                            $resultat = mysqli_query($connect,"SELECT hotelID FROM favourite WHERE clientID='$id' ");
+                                            $i = 0;
 
                                              while ($row = mysqli_fetch_assoc($resultat)){ 
-                                                include_once('../../connect/connection.php');
-                                                $test=$row['hotelID']
-                                                $res=mysqli_query($connect,"SELECT name_hotel FROM hotel WHERE hotelID='$test;");
-                                                $row = mysqli_fetch_assoc($res);
+                                                
+                                                $test=$row['hotelID'] ;
+                                                $res=mysqli_query($connect,"SELECT * FROM hotel WHERE hotelID='$test'");
+                                                $mm = mysqli_fetch_assoc($res);
+                                                $i = $i + 1 ;
                                                 ?>
                                             <tr>
-                                                <td><?php echo$row['name_hotel']?></td>
-                                                
+                                                <td><?php echo $i ; ?></td>
+                                                <td><a href="../../hotel_detail.php?id=<?php echo $test ;?>"><?php echo $mm['name_hotel'] ;?></a></td>
+                                                <td><?php echo $mm['location_hotel'] ; ?></td>
+                                                <td><a href="../../php/deleteFromP.php?id=<?php echo $test ;?>"><i class="mdi mdi-close-outline" style="color: red;"></i></a></td>
                                             </tr>
-                                            
+                                            <?php }?>
                                         </tbody>
-                                    </table><?php }?>
+                                    </table>
                                 </div>
                             </div>
                         </div>

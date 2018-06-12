@@ -12,8 +12,10 @@
 
      if(!empty($email) && !empty($pass)){  
        $query = mysqli_query($connect,"SELECT * FROM client WHERE  email = '$email' AND password='$epass'");
+       $row = mysqli_fetch_assoc($query) ;
         $count = mysqli_num_rows($query);
         if($count > 0){
+              $_SESSION['id'] = $row['clientID'] ;
               $_SESSION['email'] = $email ;
               $_SESSION['password'] = base64_decode($epass) ;
               header("Location:../indexP.php") ;

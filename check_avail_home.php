@@ -151,9 +151,11 @@
                     <a href="indexP.php">Home<i class="icon-home"></i></a>
                     </li>
                     <li><a href="contacts.php">Contacts<i class="icon-mail-alt"></i></a></li>
+                    
                     <?php if (isset($_SESSION['email'])){ ?>
+                      <li> |</li>
                     <li class="submenu" id="profil">
-                    <a href="javascript:void(0);" class="show-submenu"><?php echo $l['username']; ?> <img width="40px" src="my/lite/<?php echo $l['img'];?>"></a>
+                    <a href="javascript:void(0);" class="show-submenu"><?php echo $l['username']; ?> <img width="30px" height="30px" src="my/lite/<?php echo $l['img'];?>" style="border-radius: 50%"></a>
                     <ul>
                         <li><a href="my/lite/index.php">My Profile</a> </li>
                         <li><a href="php/logout.php">Log Out</a></li>
@@ -225,7 +227,7 @@
                                   <div class="col-md-12 col-sm-6">
                                     <div class="form-group">
                                       <label>search</label>
-                                      <input type="text" class="form-control" name="search_booking" id="name_booking" placeholder="ex : Algiers">
+                                      <input type="text" class="form-control" name="search_booking" id="name_booking" placeholder="<?php echo $city ; ?>">
                                     </div>                           
                                   </div>
                                   <div class="col-md-12 col-sm-6"id="result"></div>
@@ -237,7 +239,7 @@
                                 </div>
                           </form>
                           <hr>
-                          <a href="#0" class="btn_outline"> or Contact us</a>
+                          <a href="contacts.php" class="btn_outline"> or Contact us</a>
                           <a href="tel://004542344599" id="phone_2"><i class="icon_set_1_icon-91"></i>+213 773 34 79 71</a>
                                                  
                       </div><!-- End box_style -->
@@ -263,12 +265,16 @@
               <div class="container margin_60">
                   <div class="row">
                       <div class="col-md-5 ">
-                          <figure class="room_pic"><img src="<?php echo $row['imgg'] ?>" alt="" class="img-responsive">
+                        <div class="titi">
+                          <img src="<?php echo $row['imgg'] ?>" width="450px" height="320px">
                             <?php
                               if ($nbr_days > 0) {
                               ?>
-                            <span class="wow zoomIn" data-wow-delay="0.2s"><?php echo $row['total'] ?><small>DZD</small></span></figure>
+                             <div class="titi-text">
+                               <h2><?php echo $row['total'] ?> DZD</h2>
+                             </div>
                             <?php } ?>
+                        </div>    
                       </div>
                       <div class="col-md-4 ">
                           <div class="room_desc_home">

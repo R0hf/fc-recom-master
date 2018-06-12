@@ -93,17 +93,13 @@ include_once("../../connect/connection.php");
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a>
-                            </form>
-                        </li>
+                        
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
                         
                         <li class="nav-item">
-                            <a class="nav-link waves-effect waves-dark" href="#"><img src="<?php echo$l['img'];?>" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link waves-effect waves-dark" href="#"><img src="<?php echo $l['img'];?>" width="30px" height="30px" alt="user" class="profile-pic" /></a>
                         </li>
                     </ul>
                 </div>
@@ -125,6 +121,7 @@ include_once("../../connect/connection.php");
                         <li> <a class="waves-effect waves-dark" href="pages-profile.php" aria-expanded="false"><i class="mdi mdi-account-check"></i><span class="hide-menu">Profile</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="table-basic.php" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">Table</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="map-google.php" aria-expanded="false"><i class="mdi mdi-earth"></i><span class="hide-menu">Map</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="../../php/logout.php" aria-expanded="false"><i class="mdi mdi-account-off"></i><span class="hide-menu">Log out</span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -151,7 +148,7 @@ include_once("../../connect/connection.php");
                     </div>
                 </div>
                 <div class="card-body">
-                    <p class="lead">Hello <?php echo$l['username'];?>, it's nice to see you</p>
+                    <p class="lead">Hello <?php echo$l['username'];?> , welcome to your dashboard</p>
                 </div>
                 <div class="row justify-content-start" >
                     <div class="col-lg-4">
@@ -176,6 +173,7 @@ include_once("../../connect/connection.php");
                         <div class="card-body">
                             <b>Recently added hotels <br></b>
                             <p>Add properties to your list by clicking on the heart in the image.</p>
+                            
                         </div>
                     </div>
                 </div>
