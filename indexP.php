@@ -6,8 +6,25 @@
              
             $r= mysqli_query($connect, "SELECT * FROM client WHERE email = '$email' ");
              $l=mysqli_fetch_assoc($r);
+             $clientID = $_SESSION['id'] ;
+             $sql2 = mysqli_query($connect, "SELECT * FROM favourite WHERE clientID = '$clientID' ");
+                  $cpt = mysqli_num_rows($sql2) ;
+                  $fav = array() ;
+                  if ($cpt > 0 ){
+                    $i = 0;
+                    while ( $mk = mysqli_fetch_assoc($sql2)){
+                      $fav[$i] = $mk['hotelID'] ;
+                      $i = $i + 1 ;
+                    }
+                  }
+                  $len = count($fav) ;
                }    
-               mysqli_query($connect,"UPDATE  viewcounter set views=views+1 where id='1' ");   
+               mysqli_query($connect,"UPDATE  viewcounter set views=views+1 where id='1' ");
+               $ord = mysqli_query($connect, "SELECT * FROM hotel  ORDER BY nbr_v DESC "); 
+
+               
+
+                 
             ?>
         <!DOCTYPE html>
 <!--[if IE 9]><html class="ie ie9"> <![endif]-->
@@ -238,23 +255,23 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="mosaic_container">
-                    <img src="img/mosaic_1.jpg" alt="" class="img-responsive add_bottom_30"><span class="caption_2">Nice Outdoor</span>
+                    <a href="check_avail_home.php?search_booking=algiers&check_in=&check_out=&adults=&children=&srch=Search"><img src="img/alg.jpg" alt="" class="img-responsive add_bottom_30" ><span class="caption_2">Algiers</span></a>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="col-xs-12">
                     <div class="mosaic_container">
-                        <img src="img/mosaic_2.jpg" alt="" class="img-responsive add_bottom_30"><span class="caption_2">Large Bedroom</span>
+                        <a href="check_avail_home.php?search_booking=oran&check_in=&check_out=&adults=&children=&srch=Search"><img src="img/oran2.png" alt="" class="img-responsive add_bottom_30"><span class="caption_2">Oran</span></a>
                     </div>
                 </div>
                 <div class="col-xs-6">
                     <div class="mosaic_container">
-                        <img src="img/mosaic_3.jpg" alt="" class="img-responsive add_bottom_30"><span class="caption_2">Modern Bathroom</span>
+                        <a href="check_avail_home.php?search_booking=setif&check_in=&check_out=&adults=&children=&srch=Search"><img src="img/setif.jpg" alt="" class="img-responsive add_bottom_30"><span class="caption_2">Setif</span></a>
                     </div>
                 </div>
                 <div class="col-xs-6">
                     <div class="mosaic_container">
-                        <img src="img/mosaic_4.jpg" alt="" class="img-responsive add_bottom_30"><span class="caption_2">Wellness</span>
+                        <a href="check_avail_home.php?search_booking=bordj&check_in=&check_out=&adults=&children=&srch=Search"><img src="img/bordj.jpg" alt="" class="img-responsive add_bottom_30"><span class="caption_2">Bordj</span></a>
                     </div>
                 </div>
 
@@ -262,163 +279,145 @@
 
         </div><!-- End row -->
     </div><!-- End container -->
+
+    <center><h2>Most visited Hotels</h2></center>
     
-    <div class="container_styled_1">
-        <div class="container margin_60">
-            <div class="row">
-                <div class="col-md-5 col-md-offset-1">
-                    <figure class="room_pic"><a href="#"><img src="img/room_home_1.jpg" alt="" class="img-responsive"></a><span class="wow zoomIn" data-wow-delay="0.2s"><sup>$</sup>140<small>Per night</small></span></figure>
-                </div>
-                <div class="col-md-4 col-md-offset-1">
-                    <div class="room_desc_home">
-                        <h3>Single Room </h3>
-                        <p>
-                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-                        </p>
-                        <ul>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                                <div class="tooltip-content">
-                                    King size bed
+    <?php
+        for ($v=0; $v < 3 ; $v++) { 
+           
+            $row=mysqli_fetch_assoc($ord)
+                
+         ?>
+          
+          <div class="container_styled_1">
+              <div class="container margin_60">
+                  <div class="row">
+                      <div class="col-md-5 col-md-offset-1">
+                        <div class="titi">
+                          <img src="<?php echo $row['imgg'] ?>" width="450px" height="320px">
+                            
+                        </div>    
+                      </div>
+                      <div class="col-md-4 ">
+                          <div class="room_desc_home">
+                             <div class="cd">
+                              <div class="hotel_name"><h3><?php echo $row['name_hotel']; ?></h3></div>
+                               <div id="aaa">
+                                <?php
+                                  $t = $row['rate'] ;
+                                  if ( $t < 2 ) { echo "Low" ; $co = "#c94a30"; }
+                                  if ( $t >= 2 && $t < 4 ) { echo "Sufficient" ; $co="#f48f00";}
+                                  if ( $t >= 4 && $t < 6 ) { echo "Good" ; $co="#ed5434"; }
+                                  if ( $t >= 6 && $t < 8 ) { echo "Excellent" ; $co="#0b9808"; }
+                                  if ( $t >= 8  ) { echo "Super" ; $co = "#061798"; } 
+                                ?>
+                                <span style="background-color:<?php echo $co; ?> "><?php echo round($row['rate'], 1) ?></span></div>
+                             </div>
+                              <p>
+                                   <i class="icon-location" style="color: #0836ff"></i> <?php echo $row['address_hotel']; 
+                                      
+                                      $star=$row['stars_hotel'];
+                                      $i = 0 ;
+                                      while ($i < $star ){ ?>
+                                          <i class="icon-star" style="color:#F90;"></i>
+                                      <?php 
+                                      $i = $i + 1 ;    
+                                      } 
+                                     ?>  
+                                    
+                              </p>
+                              <p>
+                                <?php echo $row['description_hotel'] ?>
+                              </p>
+                              
+                              <ul>
+                                  <li>
+                                  <div class="tooltip_styled tooltip-effect-4">
+                                      <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
+                                      <div class="tooltip-content">
+                                          King size bed
+                                      </div>
+                                  </div>
+                                  </li>
+                                  <li>
+                                  <div class="tooltip_styled tooltip-effect-4">
+                                      <span class="tooltip-item"><i class="icon_set_2_icon-111"></i></span>
+                                      <div class="tooltip-content">
+                                          Bathtub
+                                      </div>
+                                  </div>
+                                  </li>
+                                  <li>
+                                  <div class="tooltip_styled tooltip-effect-4">
+                                      <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
+                                      <div class="tooltip-content">
+                                          Plasma TV
+                                      </div>
+                                  </div>
+                                  </li>
+                                  <li>
+                                  <div class="tooltip_styled tooltip-effect-4">
+                                      <span class="tooltip-item"><i class="icon_set_1_icon-15"></i></span>
+                                      <div class="tooltip-content">
+                                          Welcome bottle
+                                      </div>
+                                  </div>
+                                  </li>
+                                  <li>
+                                  <div class="tooltip_styled tooltip-effect-4">
+                                      <span class="tooltip-item"><i class="icon_set_2_icon-106"></i></span>
+                                      <div class="tooltip-content">
+                                          Safe box
+                                      </div>
+                                  </div>
+                                  </li>
+                              </ul>
+                              <div class="btnn">
+                                <div>
+                                  <a href="hotel_detail.php ?id=<?php echo $row['hotelID']?>" class="btn_1_outline">Read more</a>
                                 </div>
-                            </div>
-                            </li>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-118"></i></span>
-                                <div class="tooltip-content">
-                                    Shower
-                                </div>
-                            </div>
-                            </li>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                                <div class="tooltip-content">
-                                    Plasma TV
-                                </div>
-                            </div>
-                            </li>
-                        </ul>
-                        <a href="room_list.html" class="btn_1_outline">Read more</a>
-                    </div><!-- End room_desc_home -->
-                </div>
-            </div><!-- End row -->
-        </div><!-- End container -->
-    </div><!-- End container_styled_1 -->
-    
-    <div class="container margin_60">
-        <div class="row">
-            <div class="col-md-5 col-md-offset-1 col-md-push-5">
-                  <figure class="room_pic left"><a href="#"><img src="img/room_home_3.jpg" alt="" class="img-responsive"></a><span class="wow zoomIn" data-wow-delay="0.2s"><sup>$</sup>180<small>Per night</small></span></figure>
-            </div>
-            <div class="col-md-4 col-md-offset-1 col-md-pull-6">
-                <div class="room_desc_home">
-                    <h3>Double Room </h3>
-                    <p>
-                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-                    </p>
-                    <ul>
-                        <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                            <div class="tooltip-content">
-                                King size bed
-                            </div>
-                        </div>
-                        </li>
-                        <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-111"></i></span>
-                            <div class="tooltip-content">
-                                Bathtub
-                            </div>
-                        </div>
-                        </li>
-                        <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                            <div class="tooltip-content">
-                                Plasma TV
-                            </div>
-                        </div>
-                        </li>
-                        <li>
-                        <div class="tooltip_styled tooltip-effect-4">
-                            <span class="tooltip-item"><i class="icon_set_2_icon-106"></i></span>
-                            <div class="tooltip-content">
-                                Safe box
-                            </div>
-                        </div>
-                        </li>
-                    </ul>
-                    <a href="room_list.html" class="btn_1_outline">Read more</a>
-                </div><!-- End room_desc_home -->
-            </div>
-        </div><!-- End row -->
-    </div><!-- End container -->
-    
-    <div class="container_styled_1">
-        <div class="container margin_60">
-            <div class="row">
-                <div class="col-md-5 col-md-offset-1">
-                    <figure class="room_pic"><a href="#"><img src="img/room_home_2.jpg" alt="" class="img-responsive"></a><span class="wow zoomIn" data-wow-delay="0.2s"><sup>$</sup>200<small>Per night</small></span></figure>
-                </div>
-                <div class="col-md-4 col-md-offset-1">
-                    <div class="room_desc_home">
-                        <h3>Suite Room </h3>
-                        <p>
-                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-                        </p>
-                        <ul>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-104"></i></span>
-                                <div class="tooltip-content">
-                                    King size bed
-                                </div>
-                            </div>
-                            </li>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-111"></i></span>
-                                <div class="tooltip-content">
-                                    Bathtub
-                                </div>
-                            </div>
-                            </li>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-116"></i></span>
-                                <div class="tooltip-content">
-                                    Plasma TV
-                                </div>
-                            </div>
-                            </li>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_1_icon-15"></i></span>
-                                <div class="tooltip-content">
-                                    Welcome bottle
-                                </div>
-                            </div>
-                            </li>
-                            <li>
-                            <div class="tooltip_styled tooltip-effect-4">
-                                <span class="tooltip-item"><i class="icon_set_2_icon-106"></i></span>
-                                <div class="tooltip-content">
-                                    Safe box
-                                </div>
-                            </div>
-                            </li>
-                        </ul>
-                        <a href="room_list.html" class="btn_1_outline">Read more</a>
-                    </div><!-- End room_desc_home -->
-                </div>
-            </div><!-- End row -->
-        </div><!-- End container -->
-    </div><!-- End container_styled_1 -->
+                                <div>
+                                  <?php if(isset($_SESSION['email'])){ ?>
+                                  <span><i class="<?php if($len == 0){
+                                            echo "icon-heart-empty";
+                                          }else{ $ress = 0;
+                                           for($i = 0 ; $i < $len ; $i++){
+                                            if($fav[$i] == $row['hotelID']){
+                                              $ress = 1 ;
+                                            }
+                                            }
+                                            if($ress == 1){ echo "icon-heart"; }
+                                            else{ echo "icon-heart-empty"; }
+                                          }?>" id="<?php echo $row['hotelID']?>" style="font-size: 30px;color: #ed5434;cursor: pointer;" onclick="trans(this)" title="<?php echo $clientID ?>" ></i></span>
+                                  
+                                  <?php } ?>
+                                </div>                             
+                              </div>
+                          </div><!-- End room_desc_home -->
+                      </div>
+                  </div><!-- End row -->
+              </div><!-- End container -->
+          </div><!-- End container_styled_1 -->
+            
+          <?php } ?>
+
+      <script >
+        function trans(x){
+                var hotelid =  x.id;
+                var cleintid = x.title;
+            if (x.className == "icon-heart-empty") {
+                x.className = "icon-heart" ;
+                //x.title = "Remove from favourite" ;                      
+                $.post('php/addFav.php', {variable: hotelid ,alv : cleintid});
+              
+            }
+            else { 
+                x.className = "icon-heart-empty"  ;
+                //x.title = "Add to favourite" ;
+                $.post('php/deleteFav.php', {variable: hotelid ,alv : cleintid });
+                 }
+        }
+    </script>
     
     <section class="promo_full"><div class="promo_full_wp">
         <div>
@@ -427,11 +426,25 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <div class="carousel_testimonials owl-carousel owl-theme owl-loaded owl-responsive-600">              
-                                 <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-1380px, 0px, 0px); transition: 0s; width: 4890px; padding-left: 30px; padding-right: 30px;"><div class="owl-item cloned" style="width: 660px; margin-right: 30px;"><div>
+                                 <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-1380px, 0px, 0px); transition: 0s; width: 4890px; padding-left: 30px; padding-right: 30px;">
+                                    <div class="owl-item cloned" style="width: 660px; margin-right: 30px;">
+                                        <div>
                                 <div class="box_overlay">
                                     <div class="pic">
                                         <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
                                         <h4>Roberta<small>12 October 2015</small></h4>
+                                    </div>
+                                    <div class="comment">
+                                        "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
+                                    </div>
+                                </div><!-- End box_overlay -->
+                            </div>
+                        </div>
+                        <div class="owl-item cloned" style="width: 660px; margin-right: 30px;"><div>
+                                <div class="box_overlay">
+                                    <div class="pic">
+                                        <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
+                                        <h4>sokrat<small>12 October 2015</small></h4>
                                     </div>
                                     <div class="comment">
                                         "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
@@ -441,57 +454,7 @@
                                 <div class="box_overlay">
                                     <div class="pic">
                                         <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
-                                        <h4>Roberta<small>12 October 2015</small></h4>
-                                    </div>
-                                    <div class="comment">
-                                        "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
-                                    </div>
-                                </div><!-- End box_overlay -->
-                            </div></div><div class="owl-item active" style="width: 660px; margin-right: 30px;"><div>
-                                <div class="box_overlay">
-                                    <div class="pic">
-                                        <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
-                                        <h4>Roberta<small>12 October 2015</small></h4>
-                                    </div>
-                                    <div class="comment">
-                                        "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
-                                    </div>
-                                </div><!-- End box_overlay -->
-                            </div></div><div class="owl-item" style="width: 660px; margin-right: 30px;"><div>
-                                <div class="box_overlay">
-                                    <div class="pic">
-                                        <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
-                                        <h4>Roberta<small>12 October 2015</small></h4>
-                                    </div>
-                                    <div class="comment">
-                                        "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
-                                    </div>
-                                </div><!-- End box_overlay -->
-                            </div></div><div class="owl-item" style="width: 660px; margin-right: 30px;"><div>
-                                <div class="box_overlay">
-                                    <div class="pic">
-                                        <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
-                                        <h4>Roberta<small>12 October 2015</small></h4>
-                                    </div>
-                                    <div class="comment">
-                                        "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
-                                    </div>
-                                </div><!-- End box_overlay -->
-                            </div></div><div class="owl-item cloned" style="width: 660px; margin-right: 30px;"><div>
-                                <div class="box_overlay">
-                                    <div class="pic">
-                                        <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
-                                        <h4>Roberta<small>12 October 2015</small></h4>
-                                    </div>
-                                    <div class="comment">
-                                        "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
-                                    </div>
-                                </div><!-- End box_overlay -->
-                            </div></div><div class="owl-item cloned" style="width: 660px; margin-right: 30px;"><div>
-                                <div class="box_overlay">
-                                    <div class="pic">
-                                        <figure><img src="img/testimonial_1.jpg" alt="" class="img-circle"></figure>
-                                        <h4>Roberta<small>12 October 2015</small></h4>
+                                        <h4>jamal<small>12 October 2015</small></h4>
                                     </div>
                                     <div class="comment">
                                         "Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud. No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
@@ -568,6 +531,7 @@
     </footer><!-- End footer -->
 
 <div id="toTop"></div><!-- Back to top button -->
+
 <div id="modal-register" class="modal">
   
   <form class="modal-content animate"  method="POST" action="php/register.php">
@@ -620,7 +584,7 @@
     <div class="containerr">
       <input type="text" placeholder="Enter Email" name="email" id="t1">
       <input type="password" placeholder="Enter Password" name="password" id="t1">        
-      <input type="submit"  value="login" id="b1">
+      <input type="submit"  value="login" id="b1" >
       <input type="checkbox" name="remember" style="margin:26px 30px;"> <label style="color: white;">Remember me </label> 
       <a href="forgot.php" style="color: white; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
     </div>

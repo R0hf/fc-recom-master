@@ -75,7 +75,7 @@ session_start();
                     <li><a href="contacts.php">Contacts<i class="icon-mail-alt"></i></a></li>
                     <?php if (isset($_SESSION['email'])){ ?>
                     <li class="submenu" id="profil">
-                    <a href="javascript:void(0);" class="show-submenu"><?php echo $c['username']; ?> <img width="40px" src="my/lite/<?php echo $c['img'];?>"></a>
+                    <a href="javascript:void(0);" class="show-submenu"><?php echo $c['username']; ?> <img width="30px" height="30px" style="border-radius: 50%;" src="my/lite/<?php echo $c['img'];?>"></a>
                     <ul>
                         <li><a href="my/lite/index.php">My Profile</a> </li>
                         <li><a href="php/logout.php">Log Out</a></li>
@@ -95,7 +95,7 @@ session_start();
     <!-- End Header =============================================== -->
     
     <!-- SubHeader =============================================== -->
-    <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_short_2.jpg" data-natural-width="1400" data-natural-height="350">
+    <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/1.jpg" data-natural-width="1400" data-natural-height="350">
         <div id="subheader">
             <h1>Contact Us</h1>
     </div><!-- End subheader -->
@@ -237,7 +237,7 @@ session_start();
                             <li><a href="#"><i class="icon-vimeo"></i></a></li>
                             <li><a href="#"><i class="icon-youtube-play"></i></a></li>
                         </ul>
-                          <p>Copyright © 2018 <a target="_blank" title="Free CSS Themes" href="http://freecssthemes.com/">FreeCSSThemes</a>  |  All Right Reserved</p>
+                          <p>Copyright © 2018 <a target="_blank" title="Free CSS Themes" href="http://dzbooking.com/">DZ BOOKINg</a>  |  All Right Reserved</p>
 
                     </div>
                 </div>

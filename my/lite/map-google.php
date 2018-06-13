@@ -89,7 +89,7 @@ session_start();
                     $l=mysqli_fetch_assoc($r);
                     ?>
                         <li class="nav-item">
-                            <a class="nav-link waves-effect waves-dark" href="#"><img src="<?php echo$l['img'];?>" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link waves-effect waves-dark" href="#"><img width="30px" height="30px" src="<?php echo$l['img'];?>" alt="user" class="profile-pic" /></a>
                         </li>
                     </ul>
                 </div>

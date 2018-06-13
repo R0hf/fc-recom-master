@@ -10,7 +10,7 @@
      $quality = (float)$_POST['quality_review'] ;
      $comfort = (float)$_POST['comfort_review'] ;
      $comment = $_POST['review_text'] ;
-     $date = date('m-d-Y', time());
+     $date = date('d-m-Y', time());
 
      $id = (float)$_POST['verify_review'] ;
      $clientID = $l['clientID'] ;

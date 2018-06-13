@@ -15,8 +15,14 @@
             $sql3 = mysqli_query($connect, "SELECT * from hotel where `hotelID` =".$id );
             $h = mysqli_fetch_assoc($sql3);
 
+            $rs = $h['nbr_v'] ;
+            $rs = $rs + 1 ;
+            $sql6 = mysqli_query($connect,"UPDATE hotel  set nbr_v='$rs' where `hotelID` =".$id );
+
             $sql4 = mysqli_query($connect, "SELECT * from review where `hotelID` =".$id );
             $count = mysqli_num_rows($sql4);
+
+            $sql5 = mysqli_query($connect, "SELECT DISTINCT * from review where `hotelID` =".$id );
 
             
             if( $count != 0 ){
@@ -128,9 +134,9 @@
     
     <!-- Set up your HTML -->
 <div class="carousel_in">
-      <div><img src="<?php echo $h['imgg']; ?>" alt=""><div class="caption"><h3>Fantastic bed room</h3></div></div>
-      <div><img src="<?php echo $h['imgg2']; ?>" alt=""><div class="caption"><h3>Equiped bathroom</h3></div></div>
-      <div><img src="<?php echo $h['imgg3']; ?>" alt=""><div class="caption"><h3>Equiped bathroom</h3></div></div>
+      <div><img src="<?php echo $h['imgg']; ?>" alt=""></div>
+      <div><img src="<?php echo $h['imgg2']; ?>" alt=""></div>
+      <div><img src="<?php echo $h['imgg3']; ?>" alt=""></div>
       
     </div>
     
@@ -186,22 +192,19 @@
                             </ul>
                     </div>
                     </div><!-- End row  -->
-                    <h4>Room Prices</h4>
+                    <h4>Hotel Prices</h4>
                      <!-- start pricing table -->
                         <table class="table table-striped">
                         <tbody>
                         <tr>
-                            <td>Low (from 23/03 to 31/05)</td>
-                            <td><?php echo$h["price_adults"]?>$</td>
+                            <td>For one Adult</td>
+                            <td><?php echo$h["price_adults"]?>Dzd</td>
                         </tr>
                         <tr>
-                            <td>Middle (from 23/03 to 31/05)</td>
-                            <td><?php echo$h["price_adults"]?>$</td>
+                            <td>For one Child</td>
+                            <td><?php echo$h["price_children"]?>Dzd</td>
                         </tr>
-                        <tr>
-                            <td>High (from 23/03 to 31/05)</td>
-                            <td><?php echo$h["price_adults"]?>$</td>
-                        </tr>
+                        
                         </tbody>
                         </table>
                 </div><!-- End col-md-9  -->
@@ -307,43 +310,29 @@
                             </ul>
                         </div>
                     </div><!-- End row -->
-                    bb
+                   
                     <hr>
-                    <div class="review_strip_single">
-                        <img src="img/avatar1.jpg" alt="" class="img-circle">
-                        <small> - 10 March 2015 -</small>
-                        <h4>Jhon Doe</h4>
-                        <p>
-                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
-                        </p>
-                        <div class="rating">
-                            <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-empty"></i><i class="icon-star-empty"></i>
-                        </div>
-                    </div><!-- End review strip -->
+                    <?php while($df = mysqli_fetch_assoc($sql5)){
+                        $clid = $df['clientID'] ;
+                        $date = $df['date_r'] ; 
+                        $cmnt = $df['comment'] ;
+                        $res=mysqli_query($connect,"SELECT * FROM client WHERE clientID='$clid'");
+                        $fin = mysqli_fetch_assoc($res) ;
+                        ?>
                     
                     <div class="review_strip_single">
-                        <img src="img/avatar2.jpg" alt="" class="img-circle">
-                        <small> - 10 March 2015 -</small>
-                        <h4>Jhon Doe</h4>
+                        <img src="my/lite/<?php echo $fin['img'] ;?>" alt="" width="70px" height="70px" class="img-circle">
+                        <small> - <?php echo $date ; ?> -</small>
+                        <h4><?php echo $fin['username'] ; ?></h4>
                         <p>
-                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+                             "<?php echo $cmnt ; ?>."
                         </p>
                         <div class="rating">
                             <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-empty"></i><i class="icon-star-empty"></i>
                         </div>
                     </div><!-- End review strip -->
+                    <?php } ?>
                     
-                    <div class="review_strip_single last">
-                        <img src="img/avatar3.jpg" alt="" class="img-circle">
-                        <small> - 10 March 2015 -</small>
-                        <h4>Jhon Doe</h4>
-                        <p>
-                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
-                        </p>
-                        <div class="rating">
-                            <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-empty"></i><i class="icon-star-empty"></i>
-                        </div>
-                    </div><!-- End review strip -->
                     
                 </div>
             </div>  

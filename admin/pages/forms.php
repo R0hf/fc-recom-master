@@ -1,3 +1,9 @@
+
+<?php 
+    session_start();
+    if(isset($_SESSION['username'])){
+        ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -247,3 +253,6 @@
 
     </body>
 </html>
+<?php } else{
+    echo "You should be connected to access this page ." ;
+} ?>

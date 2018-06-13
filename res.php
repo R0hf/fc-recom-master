@@ -15,17 +15,11 @@ $output = '';
 if(isset($_POST["query"]))
 {
  $search = mysqli_real_escape_string($connect, $_POST["query"]);
- $query = "
-  SELECT  DISTINCT location_hotel FROM hotel 
-  WHERE location_hotel LIKE '%".$search."%'
-  
- ";
+ $query = "SELECT  DISTINCT location_hotel FROM hotel WHERE location_hotel LIKE '%".$search."%'";
 }
 else
 {
- $query = "
-  SELECT   location_hotel FROM hotel ORDER BY hotelID LIMIT 0
- ";
+ $query = "SELECT location_hotel FROM hotel ORDER BY hotelID LIMIT 0 ";
 }
 $result = mysqli_query($connect, $query);
 if(mysqli_num_rows($result) > 0)

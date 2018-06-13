@@ -1,3 +1,10 @@
+
+<?php 
+    session_start();
+    if(isset($_SESSION['username'])){
+        ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -158,28 +165,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                DataTables Advanced Tables
-                            </div>
+                           
                             <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                        <thead>
-                                            <tr>
-                                                <th>Rendering engine</th>
-                                                <th>Browser</th>
-                                                <th>Platform(s)</th>
-                                                <th>Engine version</th>
-                                                <th>CSS grade</th>
-                                            </tr>
-                                        </thead>
-                                        
-                                    </table>
-                                </div>
-                                <!-- /.table-responsive -->
-                                
-                            </div>
+                           
                             <!-- /.panel-body -->
                         </div>
                         <!-- /.panel -->
@@ -187,54 +175,12 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->  
-                <div class="row">
-                    <div class="col-lg-10">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Booking table
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>ID_booking</th>
-                                                <th>ID_room</th>
-                                                <th>Check_in</th>
-                                                <th>Check_out</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                <?php  
-                                 include_once('../../connect/connection.php');
-                                $resultat = mysqli_query($connect,"SELECT * FROM reservation ");
-                                 $i=1 ;
-                              while ($row = mysqli_fetch_assoc($resultat)){ ?>
-                                            <tr>
-                                                <td><?php echo$row['reservationID']?></td>
-                                                <td><?php echo$row['roomID']?></td>
-                                                <td><?php echo$row['check__in']?></td>
-                                                <td><?php echo$row['check__out']?></td>
-                                            </tr>
-                                            
-                                          </tbody>
-                                    </table>
-                                    <?php }?>
-                                </div>
-                                <!-- /.table-responsive -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                    </div>
-                    <!-- /.col-lg-6 -->
-                </div>        
+                      
                <div class="row">
                     <div class="col-lg-10">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                               User table
+                                Users table
                             </div>
                             <!-- /.panel-heading -->
 
@@ -318,6 +264,52 @@
                     <!-- /.col-lg-6 -->
                </div>
                 <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Hotels table
+                            </div>
+                            <!-- /.panel-heading -->
+
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Name</th>
+                                                <th>Location</th>
+                                                <th>Rate</th>
+                                                <th>Views</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php  
+                                 include_once('../../connect/connection.php');
+                                $resultat = mysqli_query($connect,"SELECT * FROM hotel ");
+                                  while ($row = mysqli_fetch_assoc($resultat)){ ?>
+                                            <tr class="success">
+                                                <td ><?php echo $row['hotelID'];?></td>
+                                                <td ><?php echo $row['name_hotel'];?></td>
+                                                <td><?php echo $row['location_hotel'];?></td>
+                                                <td ><?php echo $row['rate'];?></td>
+                                                <td ><?php echo $row['nbr_v'];?></td>
+                                            </tr>
+                                            <?php }?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+               </div>
+                <!-- /.row -->
             </div>
             <!-- /#page-wrapper -->
 
@@ -351,3 +343,6 @@
 
     </body>
 </html>
+<?php } else{
+    echo "You should be connected to access this page ." ;
+} ?>

@@ -193,8 +193,7 @@ include_once("../../connect/connection.php");
                                     <div class="form-group">
                                         <label class="col-md-12">Password</label>
                                         <div class="col-md-12">
-                                            <input type="password" name="password" value="<?php
-                                             echo $pass ;?>" class="form-control form-control-line">
+                                            <input type="password" name="password" value="" class="form-control form-control-line">
                                         </div>
                                     </div>
                                      <div class="form-group">
